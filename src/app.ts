@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
 import router from './routes';
+import 'reflect-metadata';
 
 class App {
   server: Application;
