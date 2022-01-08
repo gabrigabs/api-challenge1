@@ -1,4 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn,
+} from 'typeorm';
+import Cities from './Cities';
 
 enum Sexo {
   masculino = 'Masculino',
@@ -6,7 +9,7 @@ enum Sexo {
   outro = 'Outro',
 }
 
-@Entity()
+@Entity('Clientes')
 
 class Clients {
   @PrimaryGeneratedColumn('uuid')
@@ -27,8 +30,9 @@ class Clients {
   @Column()
   idade: number;
 
-  @Column()
-  cidade_origem: string;
+  @ManyToOne(() => Cities)
+  @JoinColumn({ name: 'cidade' })
+  cidade_origem: Cities['cidade'];
 }
 
 export default Clients;

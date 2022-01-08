@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import router from './routes';
 import 'reflect-metadata';
+import './infra/db/postgres';
 
 class App {
   server: Application;
