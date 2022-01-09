@@ -1,11 +1,10 @@
 /* eslint-disable class-methods-use-this */
 import { getCustomRepository } from 'typeorm';
 import CitiesRepository from '../repositories/CitiesRepository';
-import '../../infra/db/postgres';
-import City from '../interfaces/cityInterface';
-import Pagination from '../interfaces/paginationInterface';
+import { City, Pagination } from '../interfaces';
 import Cities from '../entities/Cities';
 import paginate from '../utils/paginate';
+import { NotFound, AlreadyExists } from '../errors';
 
 class CitiesServices {
   getRepo() {
@@ -14,7 +13,7 @@ class CitiesServices {
 
   async Create(data: City) : Promise<Cities> {
     const checkUnique = await this.getRepo().findOne(data);
-    if (checkUnique) throw new Error('Ja existe');
+    if (checkUnique) throw new AlreadyExists('City');
     const { id, cidade, estado } = await this.getRepo().save(data);
     return { id, cidade, estado };
   }
@@ -26,9 +25,13 @@ class CitiesServices {
       where: query,
     };
     const [docs, total] = await this.getRepo().findAndCount(filter);
+
+    if (docs.length === 0) throw new NotFound('Results');
+
     const result = {
       docs, total, filter, page, pages: (total / limit) + 1,
     };
+
     const paginatedResults = await paginate(result);
     return paginatedResults;
   }

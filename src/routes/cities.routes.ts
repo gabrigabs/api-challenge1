@@ -1,5 +1,6 @@
 import { Application, Router } from 'express';
 import CitiesController from '../app/controllers/CitiesController';
+import errorMiddleware from '../app/middlewares/errorMidleware';
 
 export default (server: Application, routes: Router, prefix = '/api/v1') => {
   routes.get('/cities', CitiesController.FindAll);
@@ -7,5 +8,5 @@ export default (server: Application, routes: Router, prefix = '/api/v1') => {
   routes.get('/cities/:city', CitiesController.FindAllByName);
   routes.post('/cities', CitiesController.Create);
 
-  server.use(prefix, routes);
+  server.use(prefix, routes, errorMiddleware);
 };

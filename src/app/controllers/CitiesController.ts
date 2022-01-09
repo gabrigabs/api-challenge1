@@ -1,19 +1,23 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import CitiesServices from '../services/CitiesServices';
 
 class CitiesController {
-  async Create(req: Request, res: Response): Promise<Response> {
+  async Create(req: Request, res: Response, next: NextFunction): Promise<Response | unknown> {
     try {
       const newCity = await CitiesServices.Create(req.body);
       return res.status(201).json(newCity);
     } catch (error) {
-      return res.status(400).json(error);
+      return next(error);
     }
   }
 
-  async FindAll(req: Request, res: Response): Promise<Response> {
-    const cities = await CitiesServices.ListAll(req.query);
-    return res.status(200).json(cities);
+  async FindAll(req: Request, res: Response, next: NextFunction): Promise<Response | unknown> {
+    try {
+      const cities = await CitiesServices.ListAll(req.query);
+      return res.status(200).json(cities);
+    } catch (error) {
+      return next(error);
+    }
   }
 
   async FindAllByName(req: Request, res: Response): Promise<Response> {
