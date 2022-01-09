@@ -13,26 +13,26 @@ enum Sexo {
 
 class Clients {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  nome_completo: string;
+  nome_completo!: string;
 
   @Column({
     type: 'enum',
     enum: Sexo,
   })
-  sexo: Sexo;
+  sexo!: Sexo;
 
   @Column()
-  data_nascimento: Date;
+  data_nascimento!: Date;
 
   @Column()
-  idade: number;
+  idade!: number;
 
   @ManyToOne(() => Cities)
   @JoinColumn({ name: 'cidade' })
-  cidade_origem: Cities['cidade'];
+  cidade_origem!: Cities['cidade'];
 }
 
 export default Clients;

@@ -3,8 +3,12 @@ import CitiesServices from '../services/CitiesServices';
 
 class CitiesController {
   async Create(req: Request, res: Response): Promise<Response> {
-    const newCity = await CitiesServices.Create(req.body);
-    return res.status(201).json(newCity);
+    try {
+      const newCity = await CitiesServices.Create(req.body);
+      return res.status(201).json(newCity);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
   }
 
   async FindAll(req: Request, res: Response): Promise<Response> {
