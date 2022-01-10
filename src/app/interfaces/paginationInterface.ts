@@ -1,4 +1,4 @@
-export default interface Pagination{
+export default interface Results{
   docs: Array<Object>,
   limit: number,
   page: number,

@@ -10,5 +10,8 @@ export default interface Client {
   sexo : Sexo
   data_nascimento: Date,
   idade: number
-  id_cidade:string;
+  localizacao:{
+    cidade: string,
+    estado: string
+  }
 }

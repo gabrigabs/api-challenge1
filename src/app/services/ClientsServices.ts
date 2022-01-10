@@ -4,6 +4,7 @@ import { Client, Pagination } from '../interfaces';
 import Clients from '../entities/Clients';
 import paginate from '../utils/paginate';
 import { NotFound } from '../errors';
+import clientSerializer from '../utils/ClientSerializer';
 
 class ClientsServices {
   private getRepo() {
@@ -22,14 +23,15 @@ class ClientsServices {
       where: query,
       relations: ['localizacao'],
     };
-    const [docs, total] = await this.getRepo().findAndCount(filter);
+    const [clients, total] = await this.getRepo().findAndCount(filter);
 
-    if (docs.length === 0) throw new NotFound('No results found');
+    if (clients.length === 0) throw new NotFound('No results found');
+    const docs = clients.map(clientSerializer);
 
     const result = {
       docs, total, filter, page, pages: (total / limit) + 1,
     };
-    return paginate(result) as Pagination;
+    return paginate(result);
   }
 }
 
