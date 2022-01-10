@@ -9,6 +9,6 @@ const errorMiddleware = async (error: Error, req: Request, res:Response, next:Ne
   if (error instanceof BadRequest || ValidationError) status = 400;
   if (error instanceof NotFound) status = 404;
 
-  return res.status(status).json(error);
+  return res.status(status).json(error.message);
 };
 export default errorMiddleware;

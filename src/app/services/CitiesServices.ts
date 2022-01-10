@@ -1,22 +1,12 @@
-/* eslint-disable class-methods-use-this */
-import { getCustomRepository } from 'typeorm';
 import CitiesRepository from '../repositories/CitiesRepository';
-import { City, Pagination } from '../interfaces';
-import Cities from '../entities/Cities';
+import { Pagination } from '../interfaces';
 import paginate from '../utils/paginate';
-import { NotFound, BadRequest } from '../errors';
+import { NotFound } from '../errors';
 
 class CitiesServices {
-  private getRepo() {
-    return getCustomRepository(CitiesRepository);
-  }
-
-  async Create(data: City) : Promise<Cities> {
-    const checkUnique = await this.getRepo().findOne(data);
-    if (checkUnique) throw new BadRequest('This city already exists!');
-
-    const { id, cidade, estado } = await this.getRepo().save(data);
-    return { id, cidade, estado };
+  public async create(params: any) {
+    const newData = await CitiesRepository.create(params);
+    return newData;
   }
 
   async ListAll({ page = 1, limit = 10, ...query }): Promise<Pagination> {
@@ -25,7 +15,7 @@ class CitiesServices {
       skip: (page - 1) * limit,
       where: query,
     };
-    const [docs, total] = await this.getRepo().findAndCount(filter);
+    const [docs, total] = await CitiesRepository.listAll(filter);
 
     if (docs.length === 0) throw new NotFound('No results found');
 

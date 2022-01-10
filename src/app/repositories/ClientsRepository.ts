@@ -1,8 +1,11 @@
-import { EntityRepository, Repository } from 'typeorm';
-import Clients from '../entities/Clients';
 
-@EntityRepository(Clients)
-class ClientsRepository extends Repository<Clients> {
+import Clients from '../entities/Clients';
+import BaseRepository from './BaseRepository';
+
+class ClientsRepository extends BaseRepository {
+    constructor() {
+		super(Clients);
+	}
 }
 
-export default ClientsRepository;
+export default new ClientsRepository();

@@ -1,8 +1,10 @@
-import { EntityRepository, Repository } from 'typeorm';
 import Cities from '../entities/Cities';
+import BaseRepository from './BaseRepository';
 
-@EntityRepository(Cities)
-class CitiesRepository extends Repository<Cities> {
+class CitiesRepository extends BaseRepository {
+	constructor() {
+		super(Cities);
+	}
 }
 
-export default CitiesRepository;
+export default new CitiesRepository();

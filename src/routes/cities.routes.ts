@@ -3,11 +3,13 @@ import CitiesController from '../app/controllers/CitiesController';
 import errorMiddleware from '../app/middlewares/errorMidleware';
 import { cityQueryValidation, cityValidation } from '../app/validations';
 
-export default (server: Application, routes: Router, prefix = '/api/v1') => {
-  routes.get('/cities', cityQueryValidation, CitiesController.FindAll);
-  routes.get('/cities/state/:state', CitiesController.FindAllByState);
-  routes.get('/cities/:city', CitiesController.FindAllByName);
-  routes.post('/cities', cityValidation, CitiesController.Create);
+const citiesController = new CitiesController();
+
+export default async (server: Application, routes: Router, prefix = '/api/v1') => {
+  routes.get('/cities', cityQueryValidation, citiesController.FindAll);
+  routes.get('/cities/state/:state', citiesController.FindAllByState);
+  routes.get('/cities/:city', citiesController.FindAllByName);
+  routes.post('/cities', cityValidation, citiesController.Create);
 
   server.use(prefix, routes, errorMiddleware);
 };

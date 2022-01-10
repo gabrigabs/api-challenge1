@@ -4,7 +4,7 @@ import CitiesServices from '../services/CitiesServices';
 class CitiesController {
   async Create(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
     try {
-      const newCity = await CitiesServices.Create(req.body);
+      const newCity = await CitiesServices.create(req.body);
       return res.status(201).json(newCity);
     } catch (error) {
       return next(error);
@@ -41,4 +41,4 @@ class CitiesController {
   }
 }
 
-export default new CitiesController();
+export default CitiesController;

@@ -18,6 +18,7 @@
       "eslint-config-airbnb-base": "^15.0.0",
       "eslint-config-airbnb-typescript": "^16.1.0",
       "eslint-plugin-import": "^2.25.2",
+      "prettier": "^2.5.1",
       "ts-node": "3.3.0",
       "ts-node-dev": "^1.1.8",
       "tsconfig-paths": "^3.12.0",
