@@ -1,6 +1,6 @@
 import Pagination from '../interfaces/paginationInterface';
 
-const paginate = async (data: any): Promise<Pagination> => {
+const paginate = (data: any): Pagination => {
   let { pages } = data;
   if (parseInt(data.filter.take, 10) === data.total) {
     pages = 1;

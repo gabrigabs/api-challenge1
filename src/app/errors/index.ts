@@ -1,8 +1,8 @@
-import AlreadyExists from './AlreadyExists';
+import BadRequest from './BadRequest';
 import NotFound from './NotFound';
 
 export {
-  AlreadyExists,
+  BadRequest,
   NotFound,
 
 };

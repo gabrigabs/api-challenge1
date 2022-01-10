@@ -4,7 +4,7 @@ import CitiesRepository from '../repositories/CitiesRepository';
 import { City, Pagination } from '../interfaces';
 import Cities from '../entities/Cities';
 import paginate from '../utils/paginate';
-import { NotFound, AlreadyExists } from '../errors';
+import { NotFound, BadRequest } from '../errors';
 
 class CitiesServices {
   getRepo() {
@@ -13,7 +13,8 @@ class CitiesServices {
 
   async Create(data: City) : Promise<Cities> {
     const checkUnique = await this.getRepo().findOne(data);
-    if (checkUnique) throw new AlreadyExists('City');
+    if (checkUnique) throw new BadRequest('This city already exists!');
+
     const { id, cidade, estado } = await this.getRepo().save(data);
     return { id, cidade, estado };
   }
@@ -26,14 +27,12 @@ class CitiesServices {
     };
     const [docs, total] = await this.getRepo().findAndCount(filter);
 
-    if (docs.length === 0) throw new NotFound('Results');
+    if (docs.length === 0) throw new NotFound('No results found');
 
     const result = {
       docs, total, filter, page, pages: (total / limit) + 1,
     };
-
-    const paginatedResults = await paginate(result);
-    return paginatedResults;
+    return paginate(result) as Pagination;
   }
 }
 

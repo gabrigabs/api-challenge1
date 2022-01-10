@@ -4,6 +4,6 @@ export default class NotFound extends Error {
   constructor(item: string) {
     super();
     this.description = 'Notfound';
-    this.message = `${item} not found`;
+    this.message = item;
   }
 }

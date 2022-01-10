@@ -4,6 +4,6 @@ export default class AlreadyExists extends Error {
   constructor(item: string) {
     super();
     this.description = 'BadRequest';
-    this.message = `${item} Already exists`;
+    this.message = item;
   }
 }
