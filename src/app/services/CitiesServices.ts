@@ -7,7 +7,7 @@ import paginate from '../utils/paginate';
 import { NotFound, BadRequest } from '../errors';
 
 class CitiesServices {
-  getRepo() {
+  private getRepo() {
     return getCustomRepository(CitiesRepository);
   }
 

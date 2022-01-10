@@ -48,17 +48,17 @@ export default class CreateClientsNew1641593199506 implements MigrationInterface
             isNullable: false,
           },
           {
-            name: 'cidade_origem',
-            type: 'varchar',
+            name: 'id_cidade',
+            type: 'uuid',
             isNullable: false,
           },
         ],
         foreignKeys: [
           {
             name: 'fk_cidade',
+            columnNames: ['id_cidade'],
             referencedTableName: 'Cidades',
-            referencedColumnNames: ['cidade'],
-            columnNames: ['cidade_origem'],
+            referencedColumnNames: ['id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
 
@@ -70,6 +70,6 @@ export default class CreateClientsNew1641593199506 implements MigrationInterface
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users');
+    await queryRunner.dropTable('Clientes');
   }
 }

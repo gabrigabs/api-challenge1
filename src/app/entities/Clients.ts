@@ -30,9 +30,12 @@ class Clients {
   @Column()
   idade!: number;
 
+  @Column()
+  id_cidade!: string;
+
   @ManyToOne(() => Cities)
-  @JoinColumn({ name: 'cidade' })
-  cidade_origem!: Cities['cidade'];
+  @JoinColumn({ name: 'id_cidade' })
+  localizacao!: Cities;
 }
 
 export default Clients;
