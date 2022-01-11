@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { createConnection } from 'typeorm';
+import 'dotenv/config';
 
 const connection = async () => {
   if (process.env.NODE_ENV === 'tests') {
     await createConnection({
       type: 'postgres',
-      host: 'localhost',
+      host: process.env.TYPEORM_HOST,
       port: 5432,
-      username: 'docker',
-      password: 'docker',
+      username: process.env.TYPEORM_USERNAME,
+      password: process.env.TYPEORM_PASSWORD,
       database: 'tests',
       logging: false,
       synchronize: true,
