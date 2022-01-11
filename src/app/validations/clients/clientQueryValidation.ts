@@ -8,7 +8,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       page: Joi.number().min(1),
       id: Joi.string().uuid(),
       nome_completo: Joi.string().min(1),
-      sexo: Joi.string().min(1),
+      genero: Joi.string().min(1),
       idade: Joi.number().min(1),
       data_nascimento: Joi.date()
     });

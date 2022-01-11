@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-enum Sexo {
+enum Genero {
   masculino = 'Masculino',
   feminino = 'Feminino',
   outro = 'Outro'
@@ -31,9 +31,9 @@ export default class CreateClientsNew1641593199506 implements MigrationInterface
           },
 
           {
-            name: 'sexo',
+            name: 'genero',
             type: 'enum',
-            enum: [Sexo.masculino, Sexo.feminino, Sexo.outro],
+            enum: [Genero.masculino, Genero.feminino, Genero.outro],
             isNullable: false
           },
           {

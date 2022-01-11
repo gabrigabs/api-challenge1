@@ -1,4 +1,4 @@
-enum Sexo {
+enum Genero {
   masculino = 'Masculino',
   feminino = 'Feminino',
   outro = 'Outro'
@@ -7,7 +7,7 @@ enum Sexo {
 export default interface Client {
   id: string;
   nome_completo: string;
-  sexo: Sexo;
+  genero: Genero;
   data_nascimento: Date;
   id_cidade?: string;
   idade: number;

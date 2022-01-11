@@ -109,6 +109,7 @@ describe('Cities tests', () => {
     expect(status).toBe(200);
     body.docs.forEach((doc: any) => expect(doc.cidade).toBe(cityName));
   });
+
   it('should be error on search a city that doesnt exist and return status 404', async () => {
     const response = await request.get('/api/v1/cities/CidadeNaoexistente');
     const { status } = response;
@@ -134,6 +135,7 @@ describe('Cities tests', () => {
     expect(status).toBe(200);
     body.docs.forEach((doc: any) => expect(doc.estado).toBe(stateName));
   });
+
   it('should be error on search a state that doesnt exist and return status 404', async () => {
     const response = await request.get('/api/v1/cities/state/EstadoAleatorio');
     const { status } = response;
