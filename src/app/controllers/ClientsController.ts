@@ -19,6 +19,24 @@ class ClientsController {
       return next(error);
     }
   }
+
+  async FindOneById(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+    try {
+      const client = await ClientsServices.findOne({ id: req.params.id });
+      return res.status(200).json(client);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  async FindOneByName(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+    try {
+      const client = await ClientsServices.findOne({ nome_completo: req.params.nome });
+      return res.status(200).json(client);
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 
 export default new ClientsController();

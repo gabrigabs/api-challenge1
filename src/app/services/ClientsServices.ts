@@ -35,6 +35,13 @@ class ClientsServices {
     };
     return paginate(result);
   }
+
+  async findOne(condition: object): Promise<Client> {
+    const client = await ClientsRepository.findOne({ where: condition, relations: ['localizacao'] });
+    if (!client) throw new NotFound('Client Not Found');
+
+    return clientSerializer(client);
+  }
 }
 
 export default new ClientsServices();

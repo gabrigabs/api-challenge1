@@ -9,7 +9,7 @@ export default interface Client {
   nome_completo: string;
   sexo: Sexo;
   data_nascimento: Date;
-  id_cidade: string;
+  id_cidade?: string;
   idade: number;
   localizacao: {
     cidade: string;
