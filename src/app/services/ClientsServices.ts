@@ -42,6 +42,18 @@ class ClientsServices {
 
     return clientSerializer(client);
   }
+
+  async updateOne(id: string, data: object): Promise<void> {
+    const findId = await ClientsRepository.findOne(id);
+    if (!findId) throw new NotFound('Client Not Found');
+    await ClientsRepository.updateOne(id, { nome_completo: data });
+  }
+
+  async deleteOne(id: string): Promise<void> {
+    const findId = await ClientsRepository.findOne(id);
+    if (!findId) throw new NotFound('Client Not Found');
+    await ClientsRepository.deleteOne(id);
+  }
 }
 
 export default new ClientsServices();

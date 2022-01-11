@@ -37,6 +37,24 @@ class ClientsController {
       return next(error);
     }
   }
+
+  async UpdateName(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+    try {
+      await ClientsServices.updateOne(req.params.id, req.body.nome_completo);
+      return res.status(204).end();
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  async DeleteOne(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+    try {
+      await ClientsServices.deleteOne(req.params.id);
+      return res.status(204).end();
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 
 export default new ClientsController();

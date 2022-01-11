@@ -1,4 +1,4 @@
-import { getConnection } from 'typeorm';
+import { DeleteResult, getConnection, UpdateResult } from 'typeorm';
 
 export default class BaseRepository {
   private model: any;
@@ -17,5 +17,13 @@ export default class BaseRepository {
 
   async findOne(query: any): Promise<any> {
     return getConnection().getRepository(this.model).findOne(query);
+  }
+
+  async updateOne(id: string, query: any): Promise<UpdateResult> {
+    return getConnection().getRepository(this.model).update(id, query);
+  }
+
+  async deleteOne(id: string): Promise<DeleteResult> {
+    return getConnection().getRepository(this.model).delete(id);
   }
 }
