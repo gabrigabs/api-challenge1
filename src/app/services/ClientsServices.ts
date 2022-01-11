@@ -3,11 +3,9 @@ import { Client, Pagination } from '../interfaces';
 import Clients from '../entities/Clients';
 import paginate from '../utils/paginate';
 import { NotFound } from '../errors';
-import clientSerializer from '../utils/ClientSerializer';;
+import clientSerializer from '../utils/ClientSerializer';
 
 class ClientsServices {
-
-
   async Create(data: Client): Promise<Clients> {
     const checkId = await ClientsRepository.findOne(data.id_cidade);
     if (!checkId) throw new NotFound('This city id doesnt exist');
@@ -21,7 +19,7 @@ class ClientsServices {
       take: limit,
       skip: (page - 1) * limit,
       where: query,
-      relations: ['localizacao'],
+      relations: ['localizacao']
     };
     const [clients, total] = await ClientsRepository.listAll(filter);
 
@@ -29,7 +27,11 @@ class ClientsServices {
     const docs = clients.map(clientSerializer);
 
     const result = {
-      docs, total, filter, page, pages: (total / limit) + 1,
+      docs,
+      total,
+      filter,
+      page,
+      pages: total / limit + 1
     };
     return paginate(result);
   }

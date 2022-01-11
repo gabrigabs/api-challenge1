@@ -13,8 +13,7 @@ const paginate = (data: any): Pagination => {
     limit: parseInt(data.filter.take, 10),
     page: parseInt(data.page, 10),
     pages: parseInt(pages, 10),
-    totalDocs: data.total,
-
+    totalDocs: data.total
   };
 };
 

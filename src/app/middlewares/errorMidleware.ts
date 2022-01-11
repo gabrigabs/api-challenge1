@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { ValidationError } from 'joi';
 import { BadRequest, NotFound } from '../errors';
 
-const errorMiddleware = async (error: Error, req: Request, res:Response, next:NextFunction) => {
+const errorMiddleware = async (error: Error, req: Request, res: Response, next: NextFunction) => {
   let status = 500;
 
   if (error instanceof BadRequest || ValidationError) status = 400;

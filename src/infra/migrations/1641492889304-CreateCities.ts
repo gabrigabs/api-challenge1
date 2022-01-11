@@ -15,25 +15,23 @@ export default class CreateCities1641592889304 implements MigrationInterface {
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
             isNullable: false,
-            isUnique: true,
+            isUnique: true
           },
 
           {
             name: 'cidade',
             type: 'varchar',
             isNullable: false,
-            isUnique: true,
+            isUnique: true
           },
 
           {
             name: 'estado',
             type: 'varchar',
-            isNullable: false,
-          },
-
-        ],
-
-      }),
+            isNullable: false
+          }
+        ]
+      })
     );
   }
 

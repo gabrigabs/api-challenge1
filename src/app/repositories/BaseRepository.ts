@@ -14,8 +14,8 @@ export default class BaseRepository {
   async listAll(query: any): Promise<any> {
     return getConnection().getRepository(this.model).findAndCount(query);
   }
-  
-  async findOne(query: any): Promise<any>{
-      return getConnection().getRepository(this.model).findOne(query)
+
+  async findOne(query: any): Promise<any> {
+    return getConnection().getRepository(this.model).findOne(query);
   }
 }

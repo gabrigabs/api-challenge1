@@ -1,16 +1,13 @@
-import {
-  Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import Cities from './Cities';
 
 enum Sexo {
   masculino = 'Masculino',
   feminino = 'Feminino',
-  outro = 'Outro',
+  outro = 'Outro'
 }
 
 @Entity('Clientes')
-
 class Clients {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
@@ -20,7 +17,7 @@ class Clients {
 
   @Column({
     type: 'enum',
-    enum: Sexo,
+    enum: Sexo
   })
   sexo!: Sexo;
 

@@ -4,8 +4,11 @@ import Joi from 'joi';
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const schema = Joi.object({
-      cidade: Joi.string().min(1).trim().required(),
-      estado: Joi.string().min(1).trim().required()
+      nome_completo: Joi.string().min(1).trim().required(),
+      sexo: Joi.string().valid('Masculino', 'Feminino', 'Outros').required(),
+      data_nascimento: Joi.date().required(),
+      idade: Joi.number().required().min(1),
+      id_cidade: Joi.string().uuid().required()
     });
 
     const { error } = schema.validate(req.body, { abortEarly: false });

@@ -1,7 +1,4 @@
-import {
-  Application,
-  NextFunction, Request, Response, Router,
-} from 'express';
+import { Application, NextFunction, Request, Response, Router } from 'express';
 import clients from './clients.routes';
 import cities from './cities.routes';
 import '../infra/db/postgres';

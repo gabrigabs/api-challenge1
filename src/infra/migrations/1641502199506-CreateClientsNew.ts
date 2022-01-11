@@ -4,7 +4,7 @@ import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 enum Sexo {
   masculino = 'Masculino',
   feminino = 'Feminino',
-  outro = 'Outro',
+  outro = 'Outro'
 }
 
 export default class CreateClientsNew1641593199506 implements MigrationInterface {
@@ -21,37 +21,36 @@ export default class CreateClientsNew1641593199506 implements MigrationInterface
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
             isNullable: false,
-            isUnique: true,
+            isUnique: true
           },
 
           {
             name: 'nome_completo',
             type: 'varchar',
-            isNullable: false,
-
+            isNullable: false
           },
 
           {
             name: 'sexo',
             type: 'enum',
             enum: [Sexo.masculino, Sexo.feminino, Sexo.outro],
-            isNullable: false,
+            isNullable: false
           },
           {
             name: 'data_nascimento',
             type: 'date',
-            isNullable: false,
+            isNullable: false
           },
           {
             name: 'idade',
             type: 'int',
-            isNullable: false,
+            isNullable: false
           },
           {
             name: 'id_cidade',
             type: 'uuid',
-            isNullable: false,
-          },
+            isNullable: false
+          }
         ],
         foreignKeys: [
           {
@@ -60,12 +59,10 @@ export default class CreateClientsNew1641593199506 implements MigrationInterface
             referencedTableName: 'Cidades',
             referencedColumnNames: ['id'],
             onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
-
-          },
-
-        ],
-      }),
+            onUpdate: 'CASCADE'
+          }
+        ]
+      })
     );
   }
 
