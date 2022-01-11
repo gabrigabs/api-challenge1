@@ -19,7 +19,7 @@ class CitiesServices {
     };
     const [docs, total] = await CitiesRepository.listAll(filter);
 
-    if (docs.length === 0) throw new NotFound('NO');
+    if (docs.length === 0) throw new NotFound('No results found');
 
     const result = {
       docs,

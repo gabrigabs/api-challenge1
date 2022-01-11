@@ -25,10 +25,9 @@ class ClientsServices {
     const [clients, total] = await ClientsRepository.listAll(filter);
 
     if (clients.length === 0) throw new NotFound('No results found');
-    const docs = clients.map(clientSerializer);
 
     const result = {
-      docs,
+      docs: clients.map(clientSerializer),
       total,
       filter,
       page,

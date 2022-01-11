@@ -5,7 +5,10 @@ const paginate = (data: any): Pagination => {
   if (parseInt(data.filter.take, 10) === data.total) {
     pages = 1;
   }
-  if (parseInt(data.filter.take, 10) === parseInt(data.page, 10)) {
+  if (
+    parseInt(data.filter.take, 10) === parseInt(data.page, 10) ||
+    parseInt(data.page, 10) > parseInt(data.filter.take, 10)
+  ) {
     pages -= 1;
   }
   return {
