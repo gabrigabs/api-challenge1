@@ -4,10 +4,11 @@ import Clients from '../entities/Clients';
 import paginate from '../utils/paginate';
 import { NotFound } from '../errors';
 import clientSerializer from '../utils/ClientSerializer';
+import CitiesRepository from '../repositories/CitiesRepository';
 
 class ClientsServices {
   async Create(data: Client): Promise<Clients> {
-    const checkId = await ClientsRepository.findOne(data.id_cidade);
+    const checkId = await CitiesRepository.findOne(data.id_cidade);
     if (!checkId) throw new NotFound('This city id doesnt exist');
 
     const newClient = await ClientsRepository.create(data);
