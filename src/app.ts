@@ -1,4 +1,3 @@
-import './infra/db/postgres';
 import express, { Application } from 'express';
 import router from './routes';
 import 'reflect-metadata';
@@ -20,4 +19,4 @@ class App {
     router(this.server);
   }
 }
-export default App;
+export default new App().server;
