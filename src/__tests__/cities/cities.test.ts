@@ -48,7 +48,7 @@ describe('Cities tests', () => {
     };
     await request.post('/api/v1/cities').send(city);
 
-    const response = await request.get('/api/v1/cities');
+    const response = await request.get('/api/v1/cities?limit=1');
     const { status, body } = response;
     expect(status).toBe(200);
     expect(body).toHaveProperty('docs');

@@ -4,7 +4,7 @@
    "main": "index.js",
    "license": "MIT",
    "scripts": {
-      "test": "cross-env NODE_ENV=tests node_modules/.bin/jest --runInBand --verbose --coverage",
+      "test": "cross-env NODE_ENV=test node_modules/.bin/jest --runInBand --verbose --coverage",
       "lint": "eslint . --ext .ts",
       "start": "cross-env NODE_ENV=production ts-node src/server.ts",
       "dev": "cross-env NODE_ENV=development ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts",
