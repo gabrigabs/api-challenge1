@@ -4,10 +4,10 @@ import cities from './cities.routes';
 import '../infra/db/postgres';
 
 export default async (server: Application) => {
-  server.use((req: Request, res: Response, next: NextFunction) => {
-    clients(server, Router());
-    cities(server, Router());
+    server.use((req: Request, res: Response, next: NextFunction) => {
+        clients(server, Router());
+        cities(server, Router());
 
-    next();
-  });
+        next();
+    });
 };

@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 const connection = async () => {
-  await createConnection();
+    await createConnection();
 };
 console.log('Db running');
 export default connection;

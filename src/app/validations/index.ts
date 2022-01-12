@@ -6,10 +6,10 @@ import idValidation from './general/idValidation';
 import patchClientValidation from './clients/patchClientValidation';
 
 export {
-  cityQueryValidation,
-  cityValidation,
-  clientQueryValidation,
-  clientValidation,
-  idValidation,
-  patchClientValidation
+    cityQueryValidation,
+    cityValidation,
+    clientQueryValidation,
+    clientValidation,
+    idValidation,
+    patchClientValidation
 };

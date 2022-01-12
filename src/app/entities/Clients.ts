@@ -4,30 +4,30 @@ import { Gender } from '../utils/genderEnum';
 
 @Entity('Clientes')
 class Clients {
-  @PrimaryGeneratedColumn('uuid')
-  id!: string;
+    @PrimaryGeneratedColumn('uuid')
+    id!: string;
 
-  @Column()
-  nome_completo!: string;
+    @Column()
+    nome_completo!: string;
 
-  @Column({
-    type: 'enum',
-    enum: Gender
-  })
-  genero!: Gender;
+    @Column({
+        type: 'enum',
+        enum: Gender
+    })
+    genero!: Gender;
 
-  @Column()
-  data_nascimento!: Date;
+    @Column()
+    data_nascimento!: Date;
 
-  @Column()
-  idade!: number;
+    @Column()
+    idade!: number;
 
-  @Column()
-  id_cidade!: string;
+    @Column()
+    id_cidade!: string;
 
-  @ManyToOne(() => Cities)
-  @JoinColumn({ name: 'id_cidade' })
-  localizacao!: Cities;
+    @ManyToOne(() => Cities)
+    @JoinColumn({ name: 'id_cidade' })
+    localizacao!: Cities;
 }
 
 export default Clients;

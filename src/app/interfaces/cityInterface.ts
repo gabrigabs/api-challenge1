@@ -1,5 +1,5 @@
 export default interface City {
-  id: string;
-  cidade: string;
-  estado: string;
+    id: string;
+    cidade: string;
+    estado: string;
 }
