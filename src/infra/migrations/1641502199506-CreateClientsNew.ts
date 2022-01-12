@@ -1,11 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
-
-enum Genero {
-  masculino = 'Masculino',
-  feminino = 'Feminino',
-  outro = 'Outro'
-}
+import { Gender } from '../../app/utils/genderEnum';
 
 export default class CreateClientsNew1641593199506 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -33,7 +28,7 @@ export default class CreateClientsNew1641593199506 implements MigrationInterface
           {
             name: 'genero',
             type: 'enum',
-            enum: [Genero.masculino, Genero.feminino, Genero.outro],
+            enum: [Gender.masculino, Gender.feminino, Gender.outro],
             isNullable: false
           },
           {

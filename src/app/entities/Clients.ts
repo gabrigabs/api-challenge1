@@ -1,11 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import Cities from './Cities';
-
-enum Genero {
-  masculino = 'Masculino',
-  feminino = 'Feminino',
-  outro = 'Outro'
-}
+import { Gender } from '../utils/genderEnum';
 
 @Entity('Clientes')
 class Clients {
@@ -17,9 +12,9 @@ class Clients {
 
   @Column({
     type: 'enum',
-    enum: Genero
+    enum: Gender
   })
-  genero!: Genero;
+  genero!: Gender;
 
   @Column()
   data_nascimento!: Date;

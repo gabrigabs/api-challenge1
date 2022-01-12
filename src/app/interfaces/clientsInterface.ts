@@ -1,13 +1,9 @@
-enum Genero {
-  masculino = 'Masculino',
-  feminino = 'Feminino',
-  outro = 'Outro'
-}
+import { Gender } from '../utils/genderEnum';
 
 export default interface Client {
   id: string;
   nome_completo: string;
-  genero: Genero;
+  genero: Gender;
   data_nascimento: Date;
   id_cidade?: string;
   idade: number;
