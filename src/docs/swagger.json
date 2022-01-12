@@ -14,6 +14,9 @@
         "/api/v1/cities":{
             "get": {
                 "description": "Retorna todas as cidades",
+                "tags": [
+                    "Cidades"
+                ],
                 "parameters": [
                     {
                         "name": "limit",
@@ -37,12 +40,12 @@
                     }
 
                 ],
-                "tags": [
-                    "Cidades"
-                ],
                 "responses":{
                     "200":{
-                        "description":"Lista todas as cidades cadastradas com paginação",
+                        "description":"Ok",
+                        "schema":{
+                            "$ref":"#components/schemas/cidades"
+                        },
                         "content": {
                             "application/json": {
                             "examples":{
@@ -53,22 +56,12 @@
                                         "id": "eee29c11-eb4f-42d4-95db-10e5d65b6d04",
                                         "cidade": "Fortaleza",
                                         "estado": "Ceara"
-                                    },
-                                    {
-                                        "id": "5ebcd472-6dd0-4b47-905c-5226266c9b28",
-                                        "cidade": "Sao Paulo",
-                                        "estado": "Sao Paulo"
-                                    },
-                                    {
-                                        "id": "a495f589-a4dd-454e-a094-3cb12dae8033",
-                                        "cidade": "Rio de Janeiro",
-                                        "estado": "Rio de Janeiro"
                                     }
                                 ],
                                 "limit": 10,
                                 "page": 1,
                                 "pages": 1,
-                                "totalDocs": 3
+                                "totalDocs": 1
                             }
                         }
                         }
@@ -76,12 +69,12 @@
                         }      
                     },
                     "404":{
-                        "description":"Retorna quando tem 0 resultados",
+                        "description":"NotFound",
                         "content": {
                             "application/json":{
                     
                         "examples":{
-                            "Exemplo do erro":{
+                            "Erro de não encontrado":{
                                 "value":{
                                     "description": "Notfound",
                                     "message": "No results found"
@@ -92,32 +85,18 @@
                     }
                 },
                     "400":{
-                        "description":"retorna esse erro quando passam queries invalidas",
+                        "description":"Bad Request",
                         "content":{
                             "application/json":{
 
                                 "examples":{
-                                    "Exemplo do erro":{
-                                        "value":{
-                                            "_original": {
-                                                "aaa": ""
-                                            },
-                                            "details": [
-                                                {
-                                                    "message": "\"aaa\" is not allowed",
-                                                    "path": [
-                                                        "aaa"
-                                                    ],
-                                                    "type": "object.unknown",
-                                                    "context": {
-                                                        "child": "aaa",
-                                                        "label": "aaa",
-                                                        "value": "",
-                                                        "key": "aaa"
-                                                    }
-                                                }
-                                            ]
-                                        }
+                                    "Erro de validação de queries":{
+                                        "value":[
+                                            {
+                                                "description": "qualquercoisa",
+                                                "message": "\"qualquercoisa\" is not allowed"
+                                            }
+                                        ]
                                     }
                                 }
                             }
@@ -125,6 +104,217 @@
                     }
 
                 }
+            },
+            "post":{
+                "description":"Cadastra uma nova cidade",
+                "tags": [
+                    "Cidades"
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#components/schemas/cidades"
+                            },
+                            "examples":{
+                                "cidade":{
+                                    "value":{
+                                        "cidade":"Florianopolis",
+                                        "estado":"Santa Catarina"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "description":"Created",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#components/schemas/cidades"
+                                },
+                                "examples":{
+                                    "Nova Cidade Cadastrada com sucesso":{
+                                        "value":{
+                                            "cidade": "Florianopolis",
+                                            "estado": "Santa Catarina",
+                                            "id": "d9267217-310e-4fd0-ab31-2db4dc148029"
+                                        }
+                                }   }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Bad Request",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Cadastrar uma cidade com o mesmo nome e estado":{
+                                        "value":{
+                                            "description": "BadRequest",
+                                            "message": "City already exists"
+                                        }
+                                    },
+                                    "Body incompleto ou com conteudo que nao pertence a tabela":{
+                                        "value":[
+                                            {
+                                                "description": "estado",
+                                                "message": "\"estado\" is required"
+                                            },
+                                            {
+                                                "description": "qualquercoisa",
+                                                "message": "\"qualquercoisa\" is not allowed"
+                                            }
+                                        ]
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        },
+        "/api/v1/cities/{city}":{
+            "get":{
+                "description":"Lista todas as cidades por nome",
+                "tags":[
+                    "Cidades"
+                ],
+                "parameters":[
+                    {
+                        "name":"city",
+                        "in":"path",
+                        "description":"filtra os resultados pelo nome da cidade",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Ok",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Cidades filtradas com paginação":{
+                                        "value":{
+                                            "docs": [
+                                                {
+                                                    "id": "d4c8419b-c05a-4a6a-bd19-0d89511d0568",
+                                                    "cidade": "Bom Jesus",
+                                                    "estado": "Paraiba"
+                                                },
+                                                {
+                                                    "id": "cff6c713-2f2f-406b-8ccd-4dd5f91ca89e",
+                                                    "cidade": "Bom Jesus",
+                                                    "estado": "Rio Grande do Sul"
+                                                },
+                                                {
+                                                    "id": "c9d0edbc-3804-4dcb-8964-1565d26fb78f",
+                                                    "cidade": "Bom Jesus",
+                                                    "estado": "Santa Catarina"
+                                                }
+                                            ],
+                                            "limit": 10,
+                                            "page": 1,
+                                            "pages": 1,
+                                            "totalDocs": 3
+                                        }
+                                    }
+                                }
+ 
+                            }
+                        }
+                    },
+                    "404":{
+                        "description":"NotFound",
+                        "content": {
+                            "application/json":{
+                    
+                        "examples":{
+                            "Erro de cidades não encontradas":{
+                                "value":{
+                                    "description": "Notfound",
+                                    "message": "No results found"
+                                }
+                            }    
+                        }
+                    }
+                    }
+                }
+                }
+
+            }
+        },
+        "/api/v1/cities/state/{state}":{
+            "get":{
+                "description":"Lista todas as cidades de um estado por nome",
+                "tags":[
+                    "Cidades"
+                ],
+                "parameters":[
+                    {
+                        "name":"state",
+                        "in":"path",
+                        "description":"filtra os resultados pelo nome do estado",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Ok",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Cidades filtradas por estado com paginação":{
+                                        "value":{
+                                            "docs": [
+                                                {
+                                                    "id": "eee29c11-eb4f-42d4-95db-10e5d65b6d04",
+                                                    "cidade": "Fortaleza",
+                                                    "estado": "Ceara"
+                                                },
+                                                {
+                                                    "id": "4bc5c364-4d13-4b97-a343-83f8f2a32012",
+                                                    "cidade": "Maracanau",
+                                                    "estado": "Ceara"
+                                                },
+                                                {
+                                                    "id": "478958ae-a94d-40d9-8f19-7aa2aba3e1a8",
+                                                    "cidade": "Russas",
+                                                    "estado": "Ceara"
+                                                }
+                                            ],
+                                            "limit": 10,
+                                            "page": 1,
+                                            "pages": 1,
+                                            "totalDocs": 3
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description":"NotFound",
+                        "content": {
+                            "application/json":{
+                    
+                        "examples":{
+                            "Erro de cidades não encontradas":{
+                                "value":{
+                                    "description": "Notfound",
+                                    "message": "No results found"
+                                }
+                            }    
+                        }
+                    }
+                    }
+                }
+            }
+            
             }
         }
     },
