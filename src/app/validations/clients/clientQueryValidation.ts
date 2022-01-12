@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import Joi from 'joi';
+import { serializer } from '../../utils/errorSerializer';
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -17,6 +18,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         if (error) throw error;
         return next();
     } catch (error) {
-        return next(error);
+        return next(serializer(error));
     }
 };
