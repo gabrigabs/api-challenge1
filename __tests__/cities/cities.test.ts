@@ -42,12 +42,6 @@ describe('Cities tests', () => {
   });
 
   it('Should be able to list all cities and have pagination', async () => {
-    const city = {
-      cidade: 'Fortaleza',
-      estado: 'Ceara'
-    };
-    await request.post('/api/v1/cities').send(city);
-
     const response = await request.get('/api/v1/cities?limit=1');
     const { status, body } = response;
     expect(status).toBe(200);
@@ -56,6 +50,8 @@ describe('Cities tests', () => {
     expect(body).toHaveProperty('page');
     expect(body).toHaveProperty('pages');
     expect(body).toHaveProperty('totalDocs');
+    expect(body.docs.length).toBe(1);
+    expect(body.limit).toBe(1);
   });
 
   it('should return a error when returns no results and return status 404', async () => {
@@ -71,18 +67,6 @@ describe('Cities tests', () => {
   });
 
   it('should be able to change limit of results on queries', async () => {
-    const city = {
-      cidade: 'Fortaleza',
-      estado: 'Ceara'
-    };
-    await request.post('/api/v1/cities').send(city);
-
-    const city2 = {
-      cidade: 'Salvador',
-      estado: 'Bahia'
-    };
-    await request.post('/api/v1/cities').send(city2);
-
     const response = await request.get('/api/v1/cities?limit=1');
     const { status, body } = response;
     expect(status).toBe(200);
@@ -92,17 +76,12 @@ describe('Cities tests', () => {
 
   it('should be able to search by the city name on req params', async () => {
     const cityName = 'Fortaleza';
+
     const city = {
-      cidade: 'Fortaleza',
-      estado: 'Ceara'
+      cidade: 'Sao Paulo',
+      estado: 'Sao Paulo'
     };
     await request.post('/api/v1/cities').send(city);
-
-    const city2 = {
-      cidade: 'Salvador',
-      estado: 'Bahia'
-    };
-    await request.post('/api/v1/cities').send(city2);
 
     const response = await request.get(`/api/v1/cities/${cityName}`);
     const { status, body } = response;
@@ -118,17 +97,12 @@ describe('Cities tests', () => {
 
   it('should be able to search cities by state name on req params', async () => {
     const stateName = 'Ceara';
-    const city = {
-      cidade: 'Fortaleza',
-      estado: 'Ceara'
-    };
-    await request.post('/api/v1/cities').send(city);
 
-    const city2 = {
+    const city = {
       cidade: 'Salvador',
       estado: 'Bahia'
     };
-    await request.post('/api/v1/cities').send(city2);
+    await request.post('/api/v1/cities').send(city);
 
     const response = await request.get(`/api/v1/cities/state/${stateName}`);
     const { status, body } = response;
