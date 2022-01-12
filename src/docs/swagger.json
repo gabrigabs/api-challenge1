@@ -1,0 +1,149 @@
+{
+    "openapi": "3.0.3",
+    "info":{
+        "title":"Challenge API",
+        "description":"Uma api que cadastra cidades e clientes",
+        "license":{
+            "name": "MIT",
+            "url": "https://choosealicense.com/licenses/mit/"
+        },
+        "version": "1.0.0"
+    },
+
+    "paths":{
+        "/api/v1/cities":{
+            "get": {
+                "description": "Retorna todas as cidades",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description":"limita a quantidade de resultados por pagina"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description":"define a pagina dos resultado"
+                    },
+                    {
+                        "name": "cidade",
+                        "in": "query",
+                        "description":"filtra os resultados pelo nome da cidade"
+                    },
+                    {
+                        "name": "estado",
+                        "in": "query",
+                        "description":"filtra os resultados pelo nome do estado"
+                    }
+
+                ],
+                "tags": [
+                    "Cidades"
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Lista todas as cidades cadastradas com paginação",
+                        "content": {
+                            "application/json": {
+                            "examples":{
+                                "Lista de objetos paginados":{
+                                "value":{
+                                "docs": [
+                                    {
+                                        "id": "eee29c11-eb4f-42d4-95db-10e5d65b6d04",
+                                        "cidade": "Fortaleza",
+                                        "estado": "Ceara"
+                                    },
+                                    {
+                                        "id": "5ebcd472-6dd0-4b47-905c-5226266c9b28",
+                                        "cidade": "Sao Paulo",
+                                        "estado": "Sao Paulo"
+                                    },
+                                    {
+                                        "id": "a495f589-a4dd-454e-a094-3cb12dae8033",
+                                        "cidade": "Rio de Janeiro",
+                                        "estado": "Rio de Janeiro"
+                                    }
+                                ],
+                                "limit": 10,
+                                "page": 1,
+                                "pages": 1,
+                                "totalDocs": 3
+                            }
+                        }
+                        }
+                        }
+                        }      
+                    },
+                    "404":{
+                        "description":"Retorna quando tem 0 resultados",
+                        "content": {
+                            "application/json":{
+                    
+                        "examples":{
+                            "Exemplo do erro":{
+                                "value":{
+                                    "description": "Notfound",
+                                    "message": "No results found"
+                                }
+                            }    
+                        }
+                    }
+                    }
+                },
+                    "400":{
+                        "description":"retorna esse erro quando passam queries invalidas",
+                        "content":{
+                            "application/json":{
+
+                                "examples":{
+                                    "Exemplo do erro":{
+                                        "value":{
+                                            "_original": {
+                                                "aaa": ""
+                                            },
+                                            "details": [
+                                                {
+                                                    "message": "\"aaa\" is not allowed",
+                                                    "path": [
+                                                        "aaa"
+                                                    ],
+                                                    "type": "object.unknown",
+                                                    "context": {
+                                                        "child": "aaa",
+                                                        "label": "aaa",
+                                                        "value": "",
+                                                        "key": "aaa"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+          "cidades": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "cidade": {
+                "type": "string"
+              },
+              "estado": {
+                "type": "string"
+              }
+            }
+          }
+    }
+}
+}
