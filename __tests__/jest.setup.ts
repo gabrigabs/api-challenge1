@@ -1,5 +1,5 @@
 import { getConnection } from 'typeorm';
-import connection from '../infra/db/postgres';
+import connection from '../src/infra/db/postgres';
 
 beforeAll(async () => {
   await connection();

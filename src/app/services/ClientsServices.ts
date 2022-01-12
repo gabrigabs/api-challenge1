@@ -7,7 +7,7 @@ import clientSerializer from '../utils/ClientSerializer';
 import CitiesRepository from '../repositories/CitiesRepository';
 
 class ClientsServices {
-  async Create(data: Client): Promise<Clients> {
+  async create(data: Client): Promise<Clients> {
     const checkId = await CitiesRepository.findOne(data.id_cidade);
     if (!checkId) throw new NotFound('This city id doesnt exist');
 
@@ -15,7 +15,7 @@ class ClientsServices {
     return newClient;
   }
 
-  async ListAll({ page = 1, limit = 10, ...query }): Promise<Pagination> {
+  async listAll({ page = 1, limit = 10, ...query }): Promise<Pagination> {
     const filter = {
       take: limit,
       skip: (page - 1) * limit,

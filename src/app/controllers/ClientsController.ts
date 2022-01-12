@@ -2,25 +2,25 @@ import { NextFunction, Request, Response } from 'express';
 import ClientsServices from '../services/ClientsServices';
 
 class ClientsController {
-  async Create(req: Request, res: Response, next: NextFunction): Promise<Response | unknown> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<Response | unknown> {
     try {
-      const newClient = await ClientsServices.Create(req.body);
+      const newClient = await ClientsServices.create(req.body);
       return res.status(201).json(newClient);
     } catch (error) {
       return next(error);
     }
   }
 
-  async ListAll(req: Request, res: Response, next: NextFunction): Promise<Response | unknown> {
+  async listAll(req: Request, res: Response, next: NextFunction): Promise<Response | unknown> {
     try {
-      const allClients = await ClientsServices.ListAll(req.query);
+      const allClients = await ClientsServices.listAll(req.query);
       return res.status(200).json(allClients);
     } catch (error) {
       return next(error);
     }
   }
 
-  async FindOneById(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+  async findOneById(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
     try {
       const client = await ClientsServices.findOne({ id: req.params.id });
       return res.status(200).json(client);
@@ -29,7 +29,7 @@ class ClientsController {
     }
   }
 
-  async FindOneByName(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+  async findOneByName(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
     try {
       const client = await ClientsServices.findOne({ nome_completo: req.params.nome });
       return res.status(200).json(client);
@@ -38,7 +38,7 @@ class ClientsController {
     }
   }
 
-  async UpdateName(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+  async updateName(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
     try {
       await ClientsServices.updateOne(req.params.id, req.body.nome_completo);
       return res.status(204).end();
@@ -47,7 +47,7 @@ class ClientsController {
     }
   }
 
-  async DeleteOne(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+  async deleteOne(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
     try {
       await ClientsServices.deleteOne(req.params.id);
       return res.status(204).end();

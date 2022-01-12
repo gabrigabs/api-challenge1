@@ -1,5 +1,5 @@
 import supertest from 'supertest';
-import App from '../../app';
+import App from '../../src/app';
 
 const request = supertest(App);
 describe('Cities tests', () => {

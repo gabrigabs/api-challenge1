@@ -11,7 +11,7 @@ class CitiesServices {
     return newData;
   }
 
-  async ListAll({ page = 1, limit = 10, ...query }): Promise<Pagination> {
+  async listAll({ page = 1, limit = 10, ...query }): Promise<Pagination> {
     const filter = {
       take: limit,
       skip: (page - 1) * limit,
