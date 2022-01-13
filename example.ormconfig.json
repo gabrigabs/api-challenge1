@@ -1,0 +1,55 @@
+[
+    {
+        "name": "production",
+        "type": "postgres",
+        "host": "",
+        "port": 5432,
+        "username": "",
+        "password": "",
+        "database": "",
+        "synchronize": true,
+        "logging": false,
+        "entities": ["src/app/entities/*.ts"],
+        "migrations": ["src/infra/migrations/*.ts"],
+        "cli": {
+          "entitiesDir": "src/app/entities",
+          "migrationsDir": "src/infra/migratios"
+        }
+    },
+    {
+      "name": "development",
+      "type": "postgres",
+      "host": "",
+      "port": 5432,
+      "username": "",
+      "password": "",
+      "database": "",
+      "synchronize": true,
+      "logging": false,
+      "entities": ["src/app/entities/*.ts"],
+      "migrations": ["src/infra/migrations/*.ts"],
+      "cli": {
+        "entitiesDir": "src/app/entities",
+        "migrationsDir": "src/infra/migratios"
+      }
+    },
+
+    {
+      "name": "test",
+      "type": "postgres",
+      "host": "",
+      "port": 5432,
+      "username": "",
+      "password": "",
+      "database": "",
+      "synchronize": true,
+      "logging": false,
+      "dropSchema": true,
+      "entities": ["src/app/entities/*.ts"],
+      "migrations": ["src/infra/migrations/*.ts"],
+      "cli": {
+        "entitiesDir": "src/app/entities",
+        "migrationsDir": "src/infra/migratios"
+      }
+    }
+]

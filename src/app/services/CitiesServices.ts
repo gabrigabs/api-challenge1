@@ -4,7 +4,7 @@ import paginate from '../utils/paginate';
 import { BadRequest, NotFound } from '../errors';
 
 class CitiesServices {
-    public async create(params: any) {
+    async create(params: any) {
         const checkUnique = await CitiesRepository.findOne(params);
         if (checkUnique) throw new BadRequest('City already exists');
         const newData = await CitiesRepository.create(params);

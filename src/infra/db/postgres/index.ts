@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { createConnection } from 'typeorm';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+import { getConnectionOptions, createConnection } from 'typeorm';
 
 const connection = async () => {
-    await createConnection();
+    const connectionOptions = await getConnectionOptions(process.env.NODE_ENV);
+    return createConnection(connectionOptions);
 };
 console.log('Db running');
 export default connection;

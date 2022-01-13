@@ -6,5 +6,5 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-    getConnection().close();
+    getConnection(process.env.NODE_ENV).close();
 });

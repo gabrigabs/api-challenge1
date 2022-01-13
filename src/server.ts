@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import App from './app';
 import 'dotenv/config';
+
 import connection from './infra/db/postgres';
 
 connection();

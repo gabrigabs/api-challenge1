@@ -1,29 +1,31 @@
-import { DeleteResult, getConnection, UpdateResult } from 'typeorm';
+import { DeleteResult, EntityTarget, getConnection, UpdateResult } from 'typeorm';
+import Cities from '../entities/Cities';
+import Clients from '../entities/Clients';
 
 export default class BaseRepository {
     private model: any;
 
-    constructor(model: any) {
+    constructor(model: EntityTarget<Clients | Cities>) {
         this.model = model;
     }
 
     async create(params: any): Promise<any> {
-        return getConnection().getRepository(this.model).save(params);
+        return getConnection(process.env.NODE_ENV).getRepository(this.model).save(params);
     }
 
     async listAll(query: any): Promise<any> {
-        return getConnection().getRepository(this.model).findAndCount(query);
+        return getConnection(process.env.NODE_ENV).getRepository(this.model).findAndCount(query);
     }
 
     async findOne(query: any): Promise<any> {
-        return getConnection().getRepository(this.model).findOne(query);
+        return getConnection(process.env.NODE_ENV).getRepository(this.model).findOne(query);
     }
 
     async updateOne(id: string, query: any): Promise<UpdateResult> {
-        return getConnection().getRepository(this.model).update(id, query);
+        return getConnection(process.env.NODE_ENV).getRepository(this.model).update(id, query);
     }
 
     async deleteOne(id: string): Promise<DeleteResult> {
-        return getConnection().getRepository(this.model).delete(id);
+        return getConnection(process.env.NODE_ENV).getRepository(this.model).delete(id);
     }
 }
