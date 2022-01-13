@@ -5,5 +5,4 @@ const connection = async () => {
     const connectionOptions = await getConnectionOptions(process.env.NODE_ENV);
     return createConnection(connectionOptions);
 };
-console.log('Db running');
 export default connection;

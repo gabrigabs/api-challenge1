@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1642076619229" clover="3.2.0">
-  <project timestamp="1642076619229" name="All files">
+<coverage generated="1642098047871" clover="3.2.0">
+  <project timestamp="1642098047871" name="All files">
     <metrics statements="274" coveredstatements="274" conditionals="30" coveredconditionals="30" methods="49" coveredmethods="49" elements="353" coveredelements="353" complexity="0" loc="274" ncloc="274" packages="14" files="30" classes="30"/>
     <package name="src">
       <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
@@ -126,14 +126,14 @@
       <metrics statements="8" coveredstatements="8" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
       <file name="errorMidleware.ts" path="C:\Users\gabriel.bezerra\Desktop\DEV\api-challenge\src\app\middlewares\errorMidleware.ts">
         <metrics statements="8" coveredstatements="8" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="20" type="stmt"/>
-        <line num="9" count="20" type="cond" truecount="3" falsecount="0"/>
-        <line num="10" count="20" type="cond" truecount="1" falsecount="0"/>
-        <line num="12" count="20" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="20" type="stmt"/>
+        <line num="8" count="20" type="cond" truecount="3" falsecount="0"/>
+        <line num="9" count="20" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="20" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.app.repositories">
@@ -292,7 +292,7 @@
       </file>
     </package>
     <package name="src.app.validations.clients">
-      <metrics statements="27" coveredstatements="27" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+      <metrics statements="28" coveredstatements="28" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
       <file name="clientQueryValidation.ts" path="C:\Users\gabriel.bezerra\Desktop\DEV\api-challenge\src\app\validations\clients\clientQueryValidation.ts">
         <metrics statements="9" coveredstatements="9" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="2" count="2" type="stmt"/>
@@ -306,16 +306,17 @@
         <line num="21" count="1" type="stmt"/>
       </file>
       <file name="clientValidation.ts" path="C:\Users\gabriel.bezerra\Desktop\DEV\api-challenge\src\app\validations\clients\clientValidation.ts">
-        <metrics statements="9" coveredstatements="9" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <metrics statements="10" coveredstatements="10" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="6" count="6" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
         <line num="7" count="6" type="stmt"/>
-        <line num="15" count="6" type="stmt"/>
-        <line num="16" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="17" count="5" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="17" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
       </file>
       <file name="patchClientValidation.ts" path="C:\Users\gabriel.bezerra\Desktop\DEV\api-challenge\src\app\validations\clients\patchClientValidation.ts">
         <metrics statements="9" coveredstatements="9" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -346,15 +347,14 @@
       </file>
     </package>
     <package name="src.infra.db.postgres">
-      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="index.ts" path="C:\Users\gabriel.bezerra\Desktop\DEV\api-challenge\src\infra\db\postgres\index.ts">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="2" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.routes">
