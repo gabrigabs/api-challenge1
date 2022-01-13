@@ -8,7 +8,7 @@ import CitiesRepository from '../repositories/CitiesRepository';
 
 class ClientsServices {
     async create(data: Client): Promise<Clients> {
-        const checkId = await CitiesRepository.findOne(data.id_cidade);
+        const checkId = await CitiesRepository.findOne(data.city_id);
         if (!checkId) throw new NotFound('This city id doesnt exist');
 
         const newClient = await ClientsRepository.create(data);
@@ -20,7 +20,7 @@ class ClientsServices {
             take: limit,
             skip: (page - 1) * limit,
             where: query,
-            relations: ['localizacao']
+            relations: ['location']
         };
         const [clients, total] = await ClientsRepository.listAll(filter);
 
@@ -37,7 +37,7 @@ class ClientsServices {
     }
 
     async findOne(condition: object): Promise<Client> {
-        const client = await ClientsRepository.findOne({ where: condition, relations: ['localizacao'] });
+        const client = await ClientsRepository.findOne({ where: condition, relations: ['location'] });
         if (!client) throw new NotFound('Client Not Found');
 
         return clientSerializer(client);
@@ -46,7 +46,7 @@ class ClientsServices {
     async updateOne(id: string, data: object): Promise<void> {
         const findId = await ClientsRepository.findOne(id);
         if (!findId) throw new NotFound('Client Not Found');
-        await ClientsRepository.updateOne(id, { nome_completo: data });
+        await ClientsRepository.updateOne(id, { full_name: data });
     }
 
     async deleteOne(id: string): Promise<void> {

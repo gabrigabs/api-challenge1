@@ -2,32 +2,32 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 't
 import Cities from './Cities';
 import { Gender } from '../utils/genderEnum';
 
-@Entity('Clientes')
+@Entity('Clients')
 class Clients {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
 
     @Column()
-    nome_completo!: string;
+    full_name!: string;
 
     @Column({
         type: 'enum',
         enum: Gender
     })
-    genero!: Gender;
+    gender!: Gender;
 
     @Column()
-    data_nascimento!: Date;
+    birthdate!: Date;
 
     @Column()
-    idade!: number;
+    age!: number;
 
     @Column()
-    id_cidade!: string;
+    city_id!: string;
 
     @ManyToOne(() => Cities)
-    @JoinColumn({ name: 'id_cidade' })
-    localizacao!: Cities;
+    @JoinColumn({ name: 'city_id' })
+    location!: Cities;
 }
 
 export default Clients;

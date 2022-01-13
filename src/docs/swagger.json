@@ -2,7 +2,7 @@
     "openapi": "3.0.3",
     "info":{
         "title":"Challenge API",
-        "description":"Uma api que cadastra cidades e clientes",
+        "description":"An api to register cities and clients",
         "license":{
             "name": "MIT",
             "url": "https://choosealicense.com/licenses/mit/"
@@ -13,21 +13,21 @@
     "paths":{
         "/api/v1/cities":{
             "post":{
-                "description":"Cadastra uma nova cidade",
+                "description":"Registers a new city",
                 "tags": [
-                    "Cidades"
+                    "Cities"
                 ],
                 "requestBody":{
                     "content":{
                         "application/json":{
                             "schema":{
-                                "$ref":"#components/schemas/cidades"
+                                "$ref":"#components/schemas/Cities"
                             },
                             "examples":{
-                                "cidade":{
+                                "city":{
                                     "value":{
-                                        "cidade":"Florianopolis",
-                                        "estado":"Santa Catarina"
+                                        "city":"Florianopolis",
+                                        "state":"Santa Catarina"
                                     }
                                 }
                             }
@@ -40,13 +40,13 @@
                         "content":{
                             "application/json":{
                                 "schema":{
-                                    "$ref":"#components/schemas/cidades"
+                                    "$ref":"#components/schemas/Cities"
                                 },
                                 "examples":{
-                                    "Nova Cidade Cadastrada com sucesso":{
+                                    "New city registered with success":{
                                         "value":{
-                                            "cidade": "Florianopolis",
-                                            "estado": "Santa Catarina",
+                                            "city": "Florianopolis",
+                                            "state": "Santa Catarina",
                                             "id": "d9267217-310e-4fd0-ab31-2db4dc148029"
                                         }
                                 }   }
@@ -58,17 +58,17 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Cadastrar uma cidade com o mesmo nome e estado":{
+                                    "Register a city with same name and state":{
                                         "value":{
                                             "description": "BadRequest",
                                             "message": "City already exists"
                                         }
                                     },
-                                    "Body incompleto ou com conteudo que nao pertence a tabela":{
+                                    "Incomplete or invalid body":{
                                         "value":[
                                             {
-                                                "description": "estado",
-                                                "message": "\"estado\" is required"
+                                                "description": "state",
+                                                "message": "\"state\" is required"
                                             },
                                             {
                                                 "description": "qualquercoisa",
@@ -86,30 +86,30 @@
             },
     
             "get": {
-                "description": "Retorna todas as cidades",
+                "description": "Returns all cities",
                 "tags": [
-                    "Cidades"
+                    "Cities"
                 ],
                 "parameters": [
                     {
                         "name": "limit",
                         "in": "query",
-                        "description":"limita a quantidade de resultados por pagina"
+                        "description":"limit results per page"
                     },
                     {
                         "name": "page",
                         "in": "query",
-                        "description":"define a pagina dos resultado"
+                        "description":"page of results"
                     },
                     {
-                        "name": "cidade",
+                        "name": "city",
                         "in": "query",
-                        "description":"filtra os resultados pelo nome da cidade"
+                        "description":"filters result by city name"
                     },
                     {
-                        "name": "estado",
+                        "name": "state",
                         "in": "query",
-                        "description":"filtra os resultados pelo nome do estado"
+                        "description":"filters result by state name"
                     }
 
                 ],
@@ -119,13 +119,13 @@
                         "content": {
                             "application/json": {
                             "examples":{
-                                "Lista de objetos paginados":{
+                                "List of paginated objects":{
                                 "value":{
                                 "docs": [
                                     {
                                         "id": "eee29c11-eb4f-42d4-95db-10e5d65b6d04",
-                                        "cidade": "Fortaleza",
-                                        "estado": "Ceara"
+                                        "city": "Fortaleza",
+                                        "state": "Ceara"
                                     }
                                 ],
                                 "limit": 10,
@@ -144,7 +144,7 @@
                             "application/json":{
                     
                         "examples":{
-                            "Erro de não encontrado":{
+                            "NotFound Error":{
                                 "value":{
                                     "description": "Notfound",
                                     "message": "No results found"
@@ -160,7 +160,7 @@
                             "application/json":{
 
                                 "examples":{
-                                    "Erro de validação de queries":{
+                                    "Query validation error":{
                                         "value":[
                                             {
                                                 "description": "qualquercoisa",
@@ -178,15 +178,15 @@
         },
         "/api/v1/cities/{city}":{
             "get":{
-                "description":"Lista todas as cidades por nome",
+                "description":"Lists all cities by name",
                 "tags":[
-                    "Cidades"
+                    "Cities"
                 ],
                 "parameters":[
                     {
                         "name":"city",
                         "in":"path",
-                        "description":"filtra os resultados pelo nome da cidade",
+                        "description":"filters result by city name",
                         "required": true
                     }
                 ],
@@ -196,23 +196,23 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Cidades filtradas com paginação":{
+                                    "Cities filtered with pagination":{
                                         "value":{
                                             "docs": [
                                                 {
                                                     "id": "d4c8419b-c05a-4a6a-bd19-0d89511d0568",
-                                                    "cidade": "Bom Jesus",
-                                                    "estado": "Paraiba"
+                                                    "city": "Bom Jesus",
+                                                    "state": "Paraiba"
                                                 },
                                                 {
                                                     "id": "cff6c713-2f2f-406b-8ccd-4dd5f91ca89e",
-                                                    "cidade": "Bom Jesus",
-                                                    "estado": "Rio Grande do Sul"
+                                                    "city": "Bom Jesus",
+                                                    "state": "Rio Grande do Sul"
                                                 },
                                                 {
                                                     "id": "c9d0edbc-3804-4dcb-8964-1565d26fb78f",
-                                                    "cidade": "Bom Jesus",
-                                                    "estado": "Santa Catarina"
+                                                    "city": "Bom Jesus",
+                                                    "state": "Santa Catarina"
                                                 }
                                             ],
                                             "limit": 10,
@@ -232,7 +232,7 @@
                             "application/json":{
                     
                         "examples":{
-                            "Erro de cidades não encontradas":{
+                            "Not found cities":{
                                 "value":{
                                     "description": "Notfound",
                                     "message": "No results found"
@@ -248,15 +248,15 @@
         },
         "/api/v1/cities/state/{state}":{
             "get":{
-                "description":"Lista todas as cidades de um estado por nome",
+                "description":"Lists all cities of a state name",
                 "tags":[
-                    "Cidades"
+                    "Cities"
                 ],
                 "parameters":[
                     {
                         "name":"state",
                         "in":"path",
-                        "description":"filtra os resultados pelo nome do estado",
+                        "description":"filters result by state name",
                         "required": true
                     }
                 ],
@@ -266,23 +266,23 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Cidades filtradas por estado com paginação":{
+                                    "Cities filtered by state with pagination":{
                                         "value":{
                                             "docs": [
                                                 {
                                                     "id": "eee29c11-eb4f-42d4-95db-10e5d65b6d04",
-                                                    "cidade": "Fortaleza",
-                                                    "estado": "Ceara"
+                                                    "city": "Fortaleza",
+                                                    "state": "Ceara"
                                                 },
                                                 {
                                                     "id": "4bc5c364-4d13-4b97-a343-83f8f2a32012",
-                                                    "cidade": "Maracanau",
-                                                    "estado": "Ceara"
+                                                    "city": "Maracanau",
+                                                    "state": "Ceara"
                                                 },
                                                 {
                                                     "id": "478958ae-a94d-40d9-8f19-7aa2aba3e1a8",
-                                                    "cidade": "Russas",
-                                                    "estado": "Ceara"
+                                                    "city": "Russas",
+                                                    "state": "Ceara"
                                                 }
                                             ],
                                             "limit": 10,
@@ -301,7 +301,7 @@
                             "application/json":{
                     
                         "examples":{
-                            "Erro de cidades não encontradas":{
+                            "Not found cities":{
                                 "value":{
                                     "description": "Notfound",
                                     "message": "No results found"
@@ -317,24 +317,24 @@
         },
         "/api/v1/clients":{
             "post":{
-                "description": "Cadastra um novo cliente",
+                "description": "Registers a new Client",
                 "tags":[
-                    "Clientes"
+                    "Clients"
                 ],
                 "requestBody":{
                     "content":{
                         "application/json":{
                             "schema":{
-                                "$ref":"#components/schemas/clientes"
+                                "$ref":"#components/schemas/Clients"
                             },
                             "examples":{
-                                "Cliente":{
+                                "Client":{
                                     "value":{
-                                        "nome_completo":"Jose Silva",
-                                        "genero": "Masculino",
-                                        "data_nascimento": "1981/05/01",
-                                        "idade": 40,
-                                        "id_cidade": "d4c8419b-c05a-4a6a-bd19-0d89511d0568"
+                                        "full_name":"Jose Silva",
+                                        "gender": "male",
+                                        "birthdate": "1981/05/01",
+                                        "age": 40,
+                                        "city_id": "d4c8419b-c05a-4a6a-bd19-0d89511d0568"
                                     }
                                 }
                             }
@@ -347,16 +347,16 @@
                         "content":{
                             "application/json":{
                                 "schema":{
-                                    "$ref":"#components/schemas/cidades"
+                                    "$ref":"#components/schemas/Cities"
                                 },
                                 "examples":{
-                                    "Novo cliente Cadastrado com sucesso":{
+                                    "New client registered":{
                                         "value":{
-                                            "nome_completo": "Jose Silva",
-                                            "genero": "Masculino",
-                                            "data_nascimento": "1981/05/01",
-                                            "idade": 40,
-                                            "id_cidade": "d4c8419b-c05a-4a6a-bd19-0d89511d0568",
+                                            "full_name": "Jose Silva",
+                                            "gender": "male",
+                                            "birthdate": "1981/05/01",
+                                            "age": 40,
+                                            "city_id": "d4c8419b-c05a-4a6a-bd19-0d89511d0568",
                                             "id": "07baf137-ed82-405b-be3c-c0f9758e95ea"
                                         }
                                 }   }
@@ -368,17 +368,17 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Cadastrar um cliente com formato de id invalido":{
+                                    "Registers a client with invalid city id format":{
                                         "value":{
-                                                "description": "id_cidade",
-                                                "message": "\"id_cidade\" must be a valid GUID"
+                                                "description": "city_id",
+                                                "message": "\"city_id\" must be a valid GUID"
                                             }
                                     },
-                                    "Body incompleto ou com conteudo que nao pertence a tabela":{
+                                    "Incomplete or invalid body":{
                                         "value":[
                                             {
-                                                "description": "nome_completo",
-                                                "message": "\"nome_completo\" is required"
+                                                "description": "full_name",
+                                                "message": "\"full_name\" is required"
                                             },
                                             {
                                                 "description": "qualquercoisa",
@@ -396,7 +396,7 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Cadastrar um cliente com um id de cidade inexistente":{
+                                    "City id not found":{
                                         "value":{
                                             "description": "Notfound",
                                             "message": "This city id doesnt exist"
@@ -409,40 +409,40 @@
                 }
             },
             "get":{
-                "description":"Retorna todos os clientes",
+                "description":"Returns all clients",
                 "tags":[
-                    "Clientes"
+                    "Clients"
                 ],
                 "parameters": [
                     {
                         "name": "limit",
                         "in": "query",
-                        "description":"limita a quantidade de resultados por pagina"
+                        "description":"limts results per page"
                     },
                     {
                         "name": "page",
                         "in": "query",
-                        "description":"define a pagina dos resultado"
+                        "description":"page of the results"
                     },
                     {
-                        "name": "nome_completo",
+                        "name": "full_name",
                         "in": "query",
-                        "description":"filtra os resultados pelo nome completo"
+                        "description":"filters the results by full name"
                     },
                     {
-                        "name": "genero",
+                        "name": "gender",
                         "in": "query",
-                        "description":"filtra os resultados pelo genero"
+                        "description":"filter the results by gender"
                     },
                     {
-                        "name":"idade",
+                        "name":"age",
                         "in":"query",
-                        "description":"filtra os resultados pela idade"
+                        "description":"filter the results by age"
                     },
                     {
-                        "name":"id_cidade",
+                        "name":"city_id",
                         "in":"query",
-                        "description":"filtra os resultados pelo id da cidade"
+                        "description":"filter the results by city id"
                     }
                 ],
                 "responses":{
@@ -451,18 +451,18 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Lista de objetos paginados":{
+                                    "List of paginated objects":{
                                         "value":{
                                             "docs": [
                                                 {
                                                     "id": "3b5044dc-ce69-4dbe-b39b-955e3d6a97bf",
-                                                    "nome_completo": "Jose Silva",
-                                                    "genero": "Masculino",
-                                                    "data_nascimento": "1981-05-01T03:00:00.000Z",
-                                                    "idade": 40,
+                                                    "full_name": "Jose Silva",
+                                                    "gender": "male",
+                                                    "birthdate": "1981-05-01T03:00:00.000Z",
+                                                    "age": 40,
                                                     "localizacao": {
-                                                        "cidade": "Bom Jesus",
-                                                        "estado": "Paraiba"
+                                                        "city": "Bom Jesus",
+                                                        "state": "Paraiba"
                                                     }
                                                 }
                                             ],
@@ -481,7 +481,7 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Erro de validação de queries":{
+                                    "Query validation error":{
                                         "value":[
                                             {
                                                 "description": "qualquercoisa",
@@ -499,7 +499,7 @@
                             "application/json":{
                     
                         "examples":{
-                            "Erro de cidades não encontradas":{
+                            "City id not found":{
                                 "value":{
                                     "description": "Notfound",
                                     "message": "No results found"
@@ -514,9 +514,9 @@
         },
         "/api/v1/clients/{id}":{
             "get":{
-                "description":"Retorna um cliente pelo id",
+                "description":"Returns a client by id",
                 "tags":[
-                    "Clientes"
+                    "Clients"
                 ],
                 "parameters":[
                     {
@@ -532,16 +532,16 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Retorna um cliente por id":{
+                                    "Returns a client by id":{
                                         "value":{
                                             "id": "3b5044dc-ce69-4dbe-b39b-955e3d6a97bf",
-                                            "nome_completo": "Jose Silva",
-                                            "genero": "Masculino",
-                                            "data_nascimento": "1981-05-01T03:00:00.000Z",
-                                            "idade": 40,
+                                            "full_name": "Jose Silva",
+                                            "gender": "male",
+                                            "birthdate": "1981-05-01T03:00:00.000Z",
+                                            "age": 40,
                                             "localizacao": {
-                                                "cidade": "Bom Jesus",
-                                                "estado": "Paraiba"
+                                                "city": "Bom Jesus",
+                                                "state": "Paraiba"
                                             }
                                         }
                                     }
@@ -554,7 +554,7 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Tentar passar um id com formato invalido":{
+                                    "Invalid id format in params":{
                                         "value":[
                                             {
                                                 "description": "id",
@@ -571,7 +571,7 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Cliente não encontrado":{
+                                    "Client not found":{
                                         "value":{
                                             "description": "Notfound",
                                             "message": "Client Not Found"
@@ -584,9 +584,9 @@
                 }
             },
             "patch":{
-                "description":"Altera o nome completo do usuario",
+                "description":"Changes the fullname of the client",
                 "tags":[
-                    "Clientes"
+                    "Clients"
                 ],
                 "parameters":[
                     {
@@ -600,12 +600,12 @@
                     "content":{
                         "application/json":{
                             "schema":{
-                                "$ref":"#components/schemas/clientes/properties/nome_completo"
+                                "$ref":"#components/schemas/Clients/properties/full_name"
                             },
                             "examples":{
-                                "Exemplo de body":{
+                                "Body example":{
                                     "value":{
-                                        "nome_completo":"Jose Silva Junior"
+                                        "full_name":"Jose Silva Junior"
                                     }
                                 }
                             }
@@ -621,7 +621,7 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Tentar passar um id com formato invalido":{
+                                    "Invalid id format in params":{
                                         "value":[
                                             {
                                                 "description": "id",
@@ -638,7 +638,7 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Cliente não encontrado":{
+                                    "Not found client":{
                                         "value":{
                                             "description": "Notfound",
                                             "message": "Client Not Found"
@@ -651,9 +651,9 @@
                 }
             },
             "delete":{
-                "description":"Deleta um cliente pelo id",
+                "description":"Removes a client by id",
                 "tags":[
-                    "Clientes"
+                    "Clients"
                 ],
                 "parameters":[
                     {
@@ -672,7 +672,7 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Tentar passar um id com formato invalido":{
+                                    "Invalid client id in params":{
                                         "value":[
                                             {
                                                 "description": "id",
@@ -689,7 +689,7 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Cliente não encontrado":{
+                                    "Not found client":{
                                         "value":{
                                             "description": "Notfound",
                                             "message": "Client Not Found"
@@ -704,16 +704,16 @@
         },
         "/api/v1/clients/name/{name}":{
             "get":{
-                "description":"Encontra um cliente pelo nome",
+                "description":"Finds a client by name",
                 "tags":[
-                    "Clientes"
+                    "Clients"
                 ],
                 "parameters":[
                     {
                         "name":"name",
                         "in":"path",
                         "required":true,
-                        "description": "Nome completo do cliente"
+                        "description": "Fullname of client"
                     }
                 ],
                 "responses":{
@@ -722,16 +722,16 @@
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Retorna um cliente por id":{
+                                    "Returns a client by name":{
                                         "value":{
                                             "id": "3b5044dc-ce69-4dbe-b39b-955e3d6a97bf",
-                                            "nome_completo": "Jose Silva",
-                                            "genero": "Masculino",
-                                            "data_nascimento": "1981-05-01T03:00:00.000Z",
-                                            "idade": 40,
+                                            "full_name": "Jose Silva",
+                                            "gender": "male",
+                                            "birthdate": "1981-05-01T03:00:00.000Z",
+                                            "age": 40,
                                             "localizacao": {
-                                                "cidade": "Bom Jesus",
-                                                "estado": "Paraiba"
+                                                "city": "Bom Jesus",
+                                                "state": "Paraiba"
                                             }
                                         }
                                     }
@@ -739,30 +739,12 @@
                             }
                         }
                     },
-                    "400":{
-                        "description":"BadRequest",
-                        "content":{
-                            "application/json":{
-                                "examples":{
-                                    "Tentar passar um id com formato invalido":{
-                                        "value":[
-                                            {
-                                                "description": "id",
-                                                "message": "\"id\" must be a valid GUID"
-                                            }
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                        
-                    },
                     "404":{
                         "description":"NotFound",
                         "content":{
                             "application/json":{
                                 "examples":{
-                                    "Cliente não encontrado":{
+                                    "NotFound Client":{
                                         "value":{
                                             "description": "Notfound",
                                             "message": "Client Not Found"
@@ -780,39 +762,39 @@
     },
     "components": {
         "schemas": {
-          "cidades": {
+          "Cities": {
             "type": "object",
             "properties": {
               "id": {
                 "type": "string"
               },
-              "cidade": {
+              "city": {
                 "type": "string"
               },
-              "estado": {
+              "state": {
                 "type": "string"
               }
             }
           },
-          "clientes":{
+          "Clients":{
               "type":"object",
               "properties":{
                   "id":{
                       "type":"string"
                   },
-                  "nome_completo":{
+                  "full_name":{
                       "type":"string"
                   },
-                  "genero":{
+                  "gender":{
                       "type":"string"
                   },
-                  "idade":{
+                  "age":{
                       "type":"number"
                   },
-                  "id_cidade":{
+                  "city_id":{
                       "type":"string"
                   },
-                  "data_nascimento":{
+                  "birthdate":{
                       "type":"date"
                 }
             }

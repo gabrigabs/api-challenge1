@@ -5,26 +5,26 @@ const request = supertest(App);
 describe('Cities tests', () => {
     it('Should be able to post a city', async () => {
         const city = {
-            cidade: 'Fortaleza',
-            estado: 'Ceara'
+            city: 'Fortaleza',
+            state: 'Ceara'
         };
         const response = await request.post('/api/v1/cities').send(city);
         const { status, body } = response;
         expect(status).toBe(201);
-        expect(body.cidade).toContain(city.cidade);
-        expect(body.estado).toContain(city.estado);
+        expect(body.city).toContain(city.city);
+        expect(body.state).toContain(city.state);
         expect(body).toHaveProperty('id');
     });
 
     it('Should not be able to post a city that name and state already exists and return error', async () => {
         const city = {
-            cidade: 'Fortaleza',
-            estado: 'Ceara'
+            city: 'Fortaleza',
+            state: 'Ceara'
         };
         await request.post('/api/v1/cities').send(city);
         const city2 = {
-            cidade: 'Fortaleza',
-            estado: 'Ceara'
+            city: 'Fortaleza',
+            state: 'Ceara'
         };
         const response = await request.post('/api/v1/cities').send(city2);
         const { status } = response;
@@ -55,13 +55,13 @@ describe('Cities tests', () => {
     });
 
     it('should return a error when returns no results and return status 404', async () => {
-        const response = await request.get('/api/v1/cities?cidade=CidadeDeMentira');
+        const response = await request.get('/api/v1/cities?city=cityDeMentira');
         const { status } = response;
         expect(status).toBe(404);
     });
 
     it('should not be able to insert invalid queries and return error with status 400', async () => {
-        const response = await request.get('/api/v1/cities?queryFalsa=CidadeDeMentira');
+        const response = await request.get('/api/v1/cities?queryFalsa=cityDeMentira');
         const { status } = response;
         expect(status).toBe(400);
     });
@@ -78,19 +78,19 @@ describe('Cities tests', () => {
         const cityName = 'Fortaleza';
 
         const city = {
-            cidade: 'Sao Paulo',
-            estado: 'Sao Paulo'
+            city: 'Sao Paulo',
+            state: 'Sao Paulo'
         };
         await request.post('/api/v1/cities').send(city);
 
         const response = await request.get(`/api/v1/cities/${cityName}`);
         const { status, body } = response;
         expect(status).toBe(200);
-        body.docs.forEach((doc: any) => expect(doc.cidade).toBe(cityName));
+        body.docs.forEach((doc: any) => expect(doc.city).toBe(cityName));
     });
 
     it('should be error on search a city that doesnt exist and return status 404', async () => {
-        const response = await request.get('/api/v1/cities/CidadeNaoexistente');
+        const response = await request.get('/api/v1/cities/cityNaoexistente');
         const { status } = response;
         expect(status).toBe(404);
     });
@@ -99,19 +99,19 @@ describe('Cities tests', () => {
         const stateName = 'Ceara';
 
         const city = {
-            cidade: 'Salvador',
-            estado: 'Bahia'
+            city: 'Salvador',
+            state: 'Bahia'
         };
         await request.post('/api/v1/cities').send(city);
 
         const response = await request.get(`/api/v1/cities/state/${stateName}`);
         const { status, body } = response;
         expect(status).toBe(200);
-        body.docs.forEach((doc: any) => expect(doc.estado).toBe(stateName));
+        body.docs.forEach((doc: any) => expect(doc.state).toBe(stateName));
     });
 
     it('should be error on search a state that doesnt exist and return status 404', async () => {
-        const response = await request.get('/api/v1/cities/state/EstadoAleatorio');
+        const response = await request.get('/api/v1/cities/state/stateAleatorio');
         const { status } = response;
         expect(status).toBe(404);
     });

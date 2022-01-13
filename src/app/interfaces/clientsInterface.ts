@@ -2,13 +2,13 @@ import { Gender } from '../utils/genderEnum';
 
 export default interface Client {
     id: string;
-    nome_completo: string;
-    genero: Gender;
-    data_nascimento: Date;
-    id_cidade?: string;
-    idade: number;
-    localizacao: {
-        cidade: string;
-        estado: string;
+    full_name: string;
+    gender: Gender;
+    birthdate: Date;
+    city_id?: string;
+    age: number;
+    location: {
+        city: string;
+        state: string;
     };
 }

@@ -8,10 +8,10 @@ export default async (req: Request, res: Response, next: NextFunction) => {
             limit: Joi.number().min(1),
             page: Joi.number().min(1),
             id: Joi.string().uuid(),
-            nome_completo: Joi.string().min(1),
-            genero: Joi.string().min(1).trim(),
-            idade: Joi.number().min(1),
-            data_nascimento: Joi.date()
+            full_name: Joi.string().min(1),
+            gender: Joi.string().min(1).trim(),
+            age: Joi.number().min(1),
+            birthdate: Joi.date()
         });
 
         const { error } = schema.validate(req.query, { abortEarly: false });

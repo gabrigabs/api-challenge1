@@ -1,16 +1,16 @@
 import { Client } from '../interfaces';
 
-const clientSerializer = ({ id, nome_completo, idade, genero, data_nascimento, localizacao }: Client) => {
-    const { cidade, estado } = localizacao;
+const clientSerializer = ({ id, full_name, age, gender, birthdate, location }: Client) => {
+    const { city, state } = location;
     return {
         id,
-        nome_completo,
-        genero,
-        data_nascimento,
-        idade,
-        localizacao: {
-            cidade,
-            estado
+        full_name,
+        gender,
+        birthdate,
+        age,
+        location: {
+            city,
+            state
         }
     };
 };

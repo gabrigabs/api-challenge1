@@ -23,7 +23,7 @@ class CitiesController {
     async findAllByName(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try {
             const { city } = req.params;
-            const citiesByName = await CitiesServices.listAll({ cidade: city });
+            const citiesByName = await CitiesServices.listAll({ city });
             return res.status(200).json(citiesByName);
         } catch (error) {
             return next(error);
@@ -33,7 +33,7 @@ class CitiesController {
     async findAllByState(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try {
             const { state } = req.params;
-            const citiesByState = await CitiesServices.listAll({ estado: state });
+            const citiesByState = await CitiesServices.listAll({ state });
             return res.status(200).json(citiesByState);
         } catch (error) {
             return next(error);

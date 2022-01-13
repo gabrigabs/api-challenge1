@@ -6,7 +6,7 @@ export default class CreateClientsNew1641593199506 implements MigrationInterface
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: 'Clientes',
+                name: 'Clients',
                 columns: [
                     {
                         name: 'id',
@@ -19,38 +19,38 @@ export default class CreateClientsNew1641593199506 implements MigrationInterface
                     },
 
                     {
-                        name: 'nome_completo',
+                        name: 'full_name',
                         type: 'varchar',
                         isNullable: false
                     },
 
                     {
-                        name: 'genero',
+                        name: 'gender',
                         type: 'enum',
-                        enum: [Gender.masculino, Gender.feminino, Gender.outro],
+                        enum: [Gender.male, Gender.female, Gender.other],
                         isNullable: false
                     },
                     {
-                        name: 'data_nascimento',
+                        name: 'birthdate',
                         type: 'date',
                         isNullable: false
                     },
                     {
-                        name: 'idade',
+                        name: 'age',
                         type: 'int',
                         isNullable: false
                     },
                     {
-                        name: 'id_cidade',
+                        name: 'city_id',
                         type: 'uuid',
                         isNullable: false
                     }
                 ],
                 foreignKeys: [
                     {
-                        name: 'fk_cidade',
-                        columnNames: ['id_cidade'],
-                        referencedTableName: 'Cidades',
+                        name: 'fk_city',
+                        columnNames: ['city_id'],
+                        referencedTableName: 'City',
                         referencedColumnNames: ['id'],
                         onDelete: 'CASCADE',
                         onUpdate: 'CASCADE'

@@ -31,7 +31,7 @@ class ClientsController {
 
     async findOneByName(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try {
-            const client = await ClientsServices.findOne({ nome_completo: req.params.nome });
+            const client = await ClientsServices.findOne({ full_name: req.params.nome });
             return res.status(200).json(client);
         } catch (error) {
             return next(error);
@@ -40,7 +40,7 @@ class ClientsController {
 
     async updateName(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try {
-            await ClientsServices.updateOne(req.params.id, req.body.nome_completo);
+            await ClientsServices.updateOne(req.params.id, req.body.full_name);
             return res.status(204).end();
         } catch (error) {
             return next(error);

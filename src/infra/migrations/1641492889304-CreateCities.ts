@@ -5,7 +5,7 @@ export default class CreateCities1641592889304 implements MigrationInterface {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: 'Cidades',
+                name: 'Cities',
                 columns: [
                     {
                         name: 'id',
@@ -18,14 +18,14 @@ export default class CreateCities1641592889304 implements MigrationInterface {
                     },
 
                     {
-                        name: 'cidade',
+                        name: 'city',
                         type: 'varchar',
                         isNullable: false,
                         isUnique: true
                     },
 
                     {
-                        name: 'estado',
+                        name: 'state',
                         type: 'varchar',
                         isNullable: false
                     }

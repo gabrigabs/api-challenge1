@@ -8,8 +8,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
             limit: Joi.number().min(1),
             page: Joi.number().min(1),
             id: Joi.string().min(1).trim(),
-            cidade: Joi.string().min(1).trim(),
-            estado: Joi.string().min(1).trim()
+            city: Joi.string().min(1).trim(),
+            state: Joi.string().min(1).trim()
         });
 
         const { error } = schema.validate(req.query, { abortEarly: false });

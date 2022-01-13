@@ -13,8 +13,7 @@
 
 ### Production dependencies
 * Node Js
-*  Typescript
-*  JOI
+* JOI
 * TypeORM
 * Postgres DB
 * reflect-metadata
@@ -22,6 +21,7 @@
 * Swagger-ui-express
 ### Development Dependencies
 * Jest
+*  Typescript
 *  Supertest
 *  Cross-ENV
 *  Eslint airbnb + prettier

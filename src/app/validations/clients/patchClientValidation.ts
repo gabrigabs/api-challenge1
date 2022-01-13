@@ -5,7 +5,7 @@ import { serializer } from '../../utils/errorSerializer';
 export default async (req: Request, res: Response, next: NextFunction) => {
     try {
         const schema = Joi.object({
-            nome_completo: Joi.string().min(1).trim().required()
+            full_name: Joi.string().min(1).trim().required()
         });
 
         const { error } = schema.validate(req.body, { abortEarly: false });

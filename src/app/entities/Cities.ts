@@ -1,13 +1,13 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity('Cidades')
+@Entity('Cities')
 export default class Cities {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
 
     @Column()
-    cidade!: string;
+    city!: string;
 
     @Column()
-    estado!: string;
+    state!: string;
 }
