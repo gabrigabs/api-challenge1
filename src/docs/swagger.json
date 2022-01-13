@@ -12,99 +12,6 @@
 
     "paths":{
         "/api/v1/cities":{
-            "get": {
-                "description": "Retorna todas as cidades",
-                "tags": [
-                    "Cidades"
-                ],
-                "parameters": [
-                    {
-                        "name": "limit",
-                        "in": "query",
-                        "description":"limita a quantidade de resultados por pagina"
-                    },
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "description":"define a pagina dos resultado"
-                    },
-                    {
-                        "name": "cidade",
-                        "in": "query",
-                        "description":"filtra os resultados pelo nome da cidade"
-                    },
-                    {
-                        "name": "estado",
-                        "in": "query",
-                        "description":"filtra os resultados pelo nome do estado"
-                    }
-
-                ],
-                "responses":{
-                    "200":{
-                        "description":"Ok",
-                        "schema":{
-                            "$ref":"#components/schemas/cidades"
-                        },
-                        "content": {
-                            "application/json": {
-                            "examples":{
-                                "Lista de objetos paginados":{
-                                "value":{
-                                "docs": [
-                                    {
-                                        "id": "eee29c11-eb4f-42d4-95db-10e5d65b6d04",
-                                        "cidade": "Fortaleza",
-                                        "estado": "Ceara"
-                                    }
-                                ],
-                                "limit": 10,
-                                "page": 1,
-                                "pages": 1,
-                                "totalDocs": 1
-                            }
-                        }
-                        }
-                        }
-                        }      
-                    },
-                    "404":{
-                        "description":"NotFound",
-                        "content": {
-                            "application/json":{
-                    
-                        "examples":{
-                            "Erro de não encontrado":{
-                                "value":{
-                                    "description": "Notfound",
-                                    "message": "No results found"
-                                }
-                            }    
-                        }
-                    }
-                    }
-                },
-                    "400":{
-                        "description":"Bad Request",
-                        "content":{
-                            "application/json":{
-
-                                "examples":{
-                                    "Erro de validação de queries":{
-                                        "value":[
-                                            {
-                                                "description": "qualquercoisa",
-                                                "message": "\"qualquercoisa\" is not allowed"
-                                            }
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                }
-            },
             "post":{
                 "description":"Cadastra uma nova cidade",
                 "tags": [
@@ -176,6 +83,97 @@
                     }
                 }
 
+            },
+    
+            "get": {
+                "description": "Retorna todas as cidades",
+                "tags": [
+                    "Cidades"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description":"limita a quantidade de resultados por pagina"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description":"define a pagina dos resultado"
+                    },
+                    {
+                        "name": "cidade",
+                        "in": "query",
+                        "description":"filtra os resultados pelo nome da cidade"
+                    },
+                    {
+                        "name": "estado",
+                        "in": "query",
+                        "description":"filtra os resultados pelo nome do estado"
+                    }
+
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Ok",
+                        "content": {
+                            "application/json": {
+                            "examples":{
+                                "Lista de objetos paginados":{
+                                "value":{
+                                "docs": [
+                                    {
+                                        "id": "eee29c11-eb4f-42d4-95db-10e5d65b6d04",
+                                        "cidade": "Fortaleza",
+                                        "estado": "Ceara"
+                                    }
+                                ],
+                                "limit": 10,
+                                "page": 1,
+                                "pages": 1,
+                                "totalDocs": 1
+                            }
+                        }
+                        }
+                        }
+                        }      
+                    },
+                    "404":{
+                        "description":"NotFound",
+                        "content": {
+                            "application/json":{
+                    
+                        "examples":{
+                            "Erro de não encontrado":{
+                                "value":{
+                                    "description": "Notfound",
+                                    "message": "No results found"
+                                }
+                            }    
+                        }
+                    }
+                    }
+                },
+                    "400":{
+                        "description":"Bad Request",
+                        "content":{
+                            "application/json":{
+
+                                "examples":{
+                                    "Erro de validação de queries":{
+                                        "value":[
+                                            {
+                                                "description": "qualquercoisa",
+                                                "message": "\"qualquercoisa\" is not allowed"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
             }
         },
         "/api/v1/cities/{city}":{
@@ -316,7 +314,469 @@
             }
             
             }
+        },
+        "/api/v1/clients":{
+            "post":{
+                "description": "Cadastra um novo cliente",
+                "tags":[
+                    "Clientes"
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#components/schemas/clientes"
+                            },
+                            "examples":{
+                                "Cliente":{
+                                    "value":{
+                                        "nome_completo":"Jose Silva",
+                                        "genero": "Masculino",
+                                        "data_nascimento": "1981/05/01",
+                                        "idade": 40,
+                                        "id_cidade": "d4c8419b-c05a-4a6a-bd19-0d89511d0568"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "description":"Created",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#components/schemas/cidades"
+                                },
+                                "examples":{
+                                    "Novo cliente Cadastrado com sucesso":{
+                                        "value":{
+                                            "nome_completo": "Jose Silva",
+                                            "genero": "Masculino",
+                                            "data_nascimento": "1981/05/01",
+                                            "idade": 40,
+                                            "id_cidade": "d4c8419b-c05a-4a6a-bd19-0d89511d0568",
+                                            "id": "07baf137-ed82-405b-be3c-c0f9758e95ea"
+                                        }
+                                }   }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Bad Request",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Cadastrar um cliente com formato de id invalido":{
+                                        "value":{
+                                                "description": "id_cidade",
+                                                "message": "\"id_cidade\" must be a valid GUID"
+                                            }
+                                    },
+                                    "Body incompleto ou com conteudo que nao pertence a tabela":{
+                                        "value":[
+                                            {
+                                                "description": "nome_completo",
+                                                "message": "\"nome_completo\" is required"
+                                            },
+                                            {
+                                                "description": "qualquercoisa",
+                                                "message": "\"qualquercoisa\" is not allowed"
+                                            }
+                                        ]
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description":"NotFound",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Cadastrar um cliente com um id de cidade inexistente":{
+                                        "value":{
+                                            "description": "Notfound",
+                                            "message": "This city id doesnt exist"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get":{
+                "description":"Retorna todos os clientes",
+                "tags":[
+                    "Clientes"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description":"limita a quantidade de resultados por pagina"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description":"define a pagina dos resultado"
+                    },
+                    {
+                        "name": "nome_completo",
+                        "in": "query",
+                        "description":"filtra os resultados pelo nome completo"
+                    },
+                    {
+                        "name": "genero",
+                        "in": "query",
+                        "description":"filtra os resultados pelo genero"
+                    },
+                    {
+                        "name":"idade",
+                        "in":"query",
+                        "description":"filtra os resultados pela idade"
+                    },
+                    {
+                        "name":"id_cidade",
+                        "in":"query",
+                        "description":"filtra os resultados pelo id da cidade"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Ok",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Lista de objetos paginados":{
+                                        "value":{
+                                            "docs": [
+                                                {
+                                                    "id": "3b5044dc-ce69-4dbe-b39b-955e3d6a97bf",
+                                                    "nome_completo": "Jose Silva",
+                                                    "genero": "Masculino",
+                                                    "data_nascimento": "1981-05-01T03:00:00.000Z",
+                                                    "idade": 40,
+                                                    "localizacao": {
+                                                        "cidade": "Bom Jesus",
+                                                        "estado": "Paraiba"
+                                                    }
+                                                }
+                                            ],
+                                            "limit": 10,
+                                            "page": 1,
+                                            "pages": 1,
+                                            "totalDocs": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"BadRequest",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Erro de validação de queries":{
+                                        "value":[
+                                            {
+                                                "description": "qualquercoisa",
+                                                "message": "\"qualquercoisa\" is not allowed"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description":"NotFound",
+                        "content": {
+                            "application/json":{
+                    
+                        "examples":{
+                            "Erro de cidades não encontradas":{
+                                "value":{
+                                    "description": "Notfound",
+                                    "message": "No results found"
+                                }
+                            }    
+                        }
+                    }
+                    }
+                }
+                }
+            }
+        },
+        "/api/v1/clients/{id}":{
+            "get":{
+                "description":"Retorna um cliente pelo id",
+                "tags":[
+                    "Clientes"
+                ],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"UUID",
+                        "required":true
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Ok",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Retorna um cliente por id":{
+                                        "value":{
+                                            "id": "3b5044dc-ce69-4dbe-b39b-955e3d6a97bf",
+                                            "nome_completo": "Jose Silva",
+                                            "genero": "Masculino",
+                                            "data_nascimento": "1981-05-01T03:00:00.000Z",
+                                            "idade": 40,
+                                            "localizacao": {
+                                                "cidade": "Bom Jesus",
+                                                "estado": "Paraiba"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"BadRequest",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Tentar passar um id com formato invalido":{
+                                        "value":[
+                                            {
+                                                "description": "id",
+                                                "message": "\"id\" must be a valid GUID"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description":"NotFound",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Cliente não encontrado":{
+                                        "value":{
+                                            "description": "Notfound",
+                                            "message": "Client Not Found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch":{
+                "description":"Altera o nome completo do usuario",
+                "tags":[
+                    "Clientes"
+                ],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "required":true,
+                        "description":"UUID"
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#components/schemas/clientes/properties/nome_completo"
+                            },
+                            "examples":{
+                                "Exemplo de body":{
+                                    "value":{
+                                        "nome_completo":"Jose Silva Junior"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "204":{
+                        "description":"No Content"
+                    },
+                    "400":{
+                        "description":"BadRequest",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Tentar passar um id com formato invalido":{
+                                        "value":[
+                                            {
+                                                "description": "id",
+                                                "message": "\"id\" must be a valid GUID"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description":"NotFound",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Cliente não encontrado":{
+                                        "value":{
+                                            "description": "Notfound",
+                                            "message": "Client Not Found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "description":"Deleta um cliente pelo id",
+                "tags":[
+                    "Clientes"
+                ],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"UUID",
+                        "required":true
+                    }
+                ],
+                "responses":{
+                    "204":{
+                        "description":"No Content"
+                    },
+                    "400":{
+                        "description":"BadRequest",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Tentar passar um id com formato invalido":{
+                                        "value":[
+                                            {
+                                                "description": "id",
+                                                "message": "\"id\" must be a valid GUID"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description":"NotFound",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Cliente não encontrado":{
+                                        "value":{
+                                            "description": "Notfound",
+                                            "message": "Client Not Found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/clients/name/{name}":{
+            "get":{
+                "description":"Encontra um cliente pelo nome",
+                "tags":[
+                    "Clientes"
+                ],
+                "parameters":[
+                    {
+                        "name":"name",
+                        "in":"path",
+                        "required":true,
+                        "description": "Nome completo do cliente"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Ok",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Retorna um cliente por id":{
+                                        "value":{
+                                            "id": "3b5044dc-ce69-4dbe-b39b-955e3d6a97bf",
+                                            "nome_completo": "Jose Silva",
+                                            "genero": "Masculino",
+                                            "data_nascimento": "1981-05-01T03:00:00.000Z",
+                                            "idade": 40,
+                                            "localizacao": {
+                                                "cidade": "Bom Jesus",
+                                                "estado": "Paraiba"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"BadRequest",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Tentar passar um id com formato invalido":{
+                                        "value":[
+                                            {
+                                                "description": "id",
+                                                "message": "\"id\" must be a valid GUID"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                        
+                    },
+                    "404":{
+                        "description":"NotFound",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Cliente não encontrado":{
+                                        "value":{
+                                            "description": "Notfound",
+                                            "message": "Client Not Found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                
+            }
+            }
         }
+    
     },
     "components": {
         "schemas": {
@@ -333,7 +793,30 @@
                 "type": "string"
               }
             }
-          }
+          },
+          "clientes":{
+              "type":"object",
+              "properties":{
+                  "id":{
+                      "type":"string"
+                  },
+                  "nome_completo":{
+                      "type":"string"
+                  },
+                  "genero":{
+                      "type":"string"
+                  },
+                  "idade":{
+                      "type":"number"
+                  },
+                  "id_cidade":{
+                      "type":"string"
+                  },
+                  "data_nascimento":{
+                      "type":"date"
+                }
+            }
+        }
     }
 }
 }
