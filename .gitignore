@@ -5,7 +5,6 @@ build/
 tmp/
 temp/
 .env
-coverage
 .env.development
 .env.test
 ormconfig.json
