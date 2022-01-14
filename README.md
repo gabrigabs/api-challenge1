@@ -5,14 +5,17 @@
 
 <h4><p  align="center">An api to register cities and clients</p></h4>
 
-<p  align  =  "center"><img  src  ="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"></img>
-<img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white"></img> <img  src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"></img> <img  src  =  "https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white"> </img> <img  src  ="https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge"></img></p>
+<p  align  =  "center"><a href= https://www.typescriptlang.org/><img  src  ="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"></a><a href = https://nodejs.org/en/></img>
+<img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white"></img</a> <a href=https://expressjs.com/><img  src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"></img></a> <a href=https://www.postgresql.org/><img  src  =  "https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white"> </img></a> <a href=https://choosealicense.com/licenses/mit/> <img  src  ="https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge"></img></a></p>
 
   
   
   
 
-#### Status: Development :warning:
+##  Author
+
+### **Gabriel Bezerrra Rodrigues**  
+<p><a href=https://www.linkedin.com/in/gabriel-be-zerra/><img src = https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white></a> <a href=https://github.com/gabrigabe><img src=https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white></a></p>
 
 # Getting started
 
@@ -126,7 +129,7 @@ yarn test
 
   
 
-# API ROUTES
+#  API ROUTES
 
   
 
@@ -441,3 +444,143 @@ No results found:
 Gets a client by id
 
 Status 200: OK
+
+```json
+{
+  "id": "3b5044dc-ce69-4dbe-b39b-955e3d6a97bf",
+  "full_name": "Jose Silva",
+  "gender": "male",
+  "birthdate": "1981-05-01T03:00:00.000Z",
+  "age": 40,
+  "localizacao": {
+    "city": "Bom Jesus",
+    "state": "Paraiba"
+  }
+}
+```
+Status 400: Bad Request
+
+Invalid id format:
+
+```json
+[
+  {
+    "description": "id",
+    "message": "\"id\" must be a valid GUID"
+  }
+]
+```
+
+Status 404: Not Found
+
+Client not found:
+
+```json
+{
+  "description": "Notfound",
+  "message": "Client Not Found"
+}
+```
+##
+### Get by name
+```
+/api/v1/clients/name/:name
+```
+Gets a client by full name
+
+Status 200: OK
+
+```json
+{
+  "id": "3b5044dc-ce69-4dbe-b39b-955e3d6a97bf",
+  "full_name": "Jose Silva",
+  "gender": "male",
+  "birthdate": "1981-05-01T03:00:00.000Z",
+  "age": 40,
+  "localizacao": {
+    "city": "Bom Jesus",
+    "state": "Paraiba"
+  }
+}
+```
+Status 404: Not Found
+
+Client not found:
+
+```json
+{
+  "description": "Notfound",
+  "message": "Client Not Found"
+}
+```
+##
+### PATCH
+```
+/api/v1/clients/:id
+```
+Changes a client full name
+
+Body example:
+```json
+{
+  "full_name": "Jose Silva Junior"
+}
+```
+
+Status 204: Sucess, No Content
+
+Status 400: Bad Request
+
+Invalid id format:
+
+```json
+[
+  {
+    "description": "id",
+    "message": "\"id\" must be a valid GUID"
+  }
+]
+```
+
+Status 404: Not Found
+
+Client not found:
+
+```json
+{
+  "description": "Notfound",
+  "message": "Client Not Found"
+}
+```
+##
+### DELETE
+```
+/api/v1/clients/:id
+```
+Deletes a client by id
+
+Status 204: Sucess, No Content
+
+Status 400: Bad Request
+
+Invalid id format:
+
+```json
+[
+  {
+    "description": "id",
+    "message": "\"id\" must be a valid GUID"
+  }
+]
+```
+
+Status 404: Not Found
+
+Client not found:
+
+```json
+{
+  "description": "Notfound",
+  "message": "Client Not Found"
+}
+```
