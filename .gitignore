@@ -8,3 +8,4 @@ temp/
 .env.development
 .env.test
 ormconfig.json
+coverage
