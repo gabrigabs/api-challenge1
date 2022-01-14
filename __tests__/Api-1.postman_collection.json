@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome_completo\":\"Jose Silva\",\r\n    \"genero\": \"Masculino\",\r\n    \"data_nascimento\": \"1981/05/01\",\r\n    \"idade\": 40,\r\n    \"id_cidade\": \"d4c8419b-c05a-4a6a-bd19-0d89511d0589\"\r\n}",
+							"raw": "{\r\n    \"full_name\":\"Jose Silva\",\r\n    \"gender\": \"male\",\r\n    \"birthdate\": \"1981/05/01\",\r\n    \"age\": 40,\r\n    \"city_id\": \"0942ea81-86b3-4094-a0c2-ea094d6da3b7\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -75,7 +75,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/clients/3b5044dc-ce69-4dbe-b39b-955e3d6a97b9",
+							"raw": "localhost:8080/api/v1/clients/9f2e4e8a-8cc3-4806-9864-b2be1d776068",
 							"host": [
 								"localhost"
 							],
@@ -84,7 +84,7 @@
 								"api",
 								"v1",
 								"clients",
-								"3b5044dc-ce69-4dbe-b39b-955e3d6a97b9"
+								"9f2e4e8a-8cc3-4806-9864-b2be1d776068"
 							]
 						}
 					},
@@ -119,7 +119,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome_completo\":\"Jose Alves Silva\"\r\n}",
+							"raw": "{\r\n    \"full_name\":\"Jose Alves Silva\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -127,7 +127,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/clients/3b5044dc-ce69-4dbe-b39b-955e3d6a97b9",
+							"raw": "localhost:8080/api/v1/clients/9f2e4e8a-8cc3-4806-9864-b2be1d776068",
 							"host": [
 								"localhost"
 							],
@@ -136,14 +136,14 @@
 								"api",
 								"v1",
 								"clients",
-								"3b5044dc-ce69-4dbe-b39b-955e3d6a97b9"
+								"9f2e4e8a-8cc3-4806-9864-b2be1d776068"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "Delete a client",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -157,7 +157,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/clients/3b5044dc-ce69-4dbe-b39b-955e3d6a97b9",
+							"raw": "localhost:8080/api/v1/clients/eb3b3e2e-fd42-492f-a2cc-a284afeb98d6",
 							"host": [
 								"localhost"
 							],
@@ -166,7 +166,7 @@
 								"api",
 								"v1",
 								"clients",
-								"3b5044dc-ce69-4dbe-b39b-955e3d6a97b9"
+								"eb3b3e2e-fd42-492f-a2cc-a284afeb98d6"
 							]
 						}
 					},
@@ -195,7 +195,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/cities/state/Ceara",
+							"raw": "localhost:8080/api/v1/cities",
 							"host": [
 								"localhost"
 							],
@@ -203,9 +203,7 @@
 							"path": [
 								"api",
 								"v1",
-								"cities",
-								"state",
-								"Ceara"
+								"cities"
 							]
 						}
 					},
@@ -221,10 +219,10 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/cities/Fortaleza",
+							"raw": "localhost:8080/api/v1/cities/Florianopolis",
 							"host": [
 								"localhost"
 							],
@@ -233,7 +231,7 @@
 								"api",
 								"v1",
 								"cities",
-								"Fortaleza"
+								"Florianopolis"
 							]
 						}
 					},
@@ -246,7 +244,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"cidade\":\"Florianopolis\",\r\n    \"estado\":\"Santa Catarina\"\r\n}",
+							"raw": "{\r\n    \"city\":\"Florianopolis\",\r\n    \"state\":\"Santa Catarina\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -281,7 +279,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/cities/state/Ceara",
+							"raw": "localhost:8080/api/v1/cities/state/Santa Catarina",
 							"host": [
 								"localhost"
 							],
@@ -291,7 +289,7 @@
 								"v1",
 								"cities",
 								"state",
-								"Ceara"
+								"Santa Catarina"
 							]
 						}
 					},
