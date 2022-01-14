@@ -88,6 +88,7 @@ yarn install
 
 Now rename the file "example.ormconfig.json" to"ormconfig.json" and ".env.example" to ".env" and fill the empty fields with your data , on ormconfig fill databases of production, developmend and tests according to your uses.
 
+#### :warning:: Remember to create the databases schemas on your postgres manually
 After this run db migrations
 ```raw
 npm run typeorm migration:run -c CONNECTION NAME HERE
@@ -125,7 +126,7 @@ npm test
 yarn test
 ```
 
-**Renember to config on ormconfig.json
+**Remember to config on ormconfig.json
 
   
 

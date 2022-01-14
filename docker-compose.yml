@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  postgres-compose:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "docker"
+      POSTGRES_USER: "docker"
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres-compose-network
+      
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "dockeruser@email.com"
+      PGADMIN_DEFAULT_PASSWORD: "docker"
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres-compose
+    networks:
+      - postgres-compose-network
+
+networks: 
+  postgres-compose-network:
+    driver: bridge
