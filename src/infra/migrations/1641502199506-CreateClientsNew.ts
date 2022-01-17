@@ -27,7 +27,7 @@ export default class CreateClientsNew1641593199506 implements MigrationInterface
                     {
                         name: 'gender',
                         type: 'enum',
-                        enum: [Gender.male, Gender.female, Gender.other],
+                        enum: Object.keys(Gender),
                         isNullable: false
                     },
                     {
@@ -50,7 +50,7 @@ export default class CreateClientsNew1641593199506 implements MigrationInterface
                     {
                         name: 'fk_city',
                         columnNames: ['city_id'],
-                        referencedTableName: 'City',
+                        referencedTableName: 'Cities',
                         referencedColumnNames: ['id'],
                         onDelete: 'CASCADE',
                         onUpdate: 'CASCADE'
@@ -61,6 +61,6 @@ export default class CreateClientsNew1641593199506 implements MigrationInterface
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('Clientes');
+        await queryRunner.dropTable('Clients');
     }
 }
