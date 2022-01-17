@@ -12,7 +12,7 @@ class Clients {
 
     @Column({
         type: 'enum',
-        enum: Gender
+        enum: Object.keys(Gender)
     })
     gender!: Gender;
 

@@ -7,7 +7,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     try {
         const schema = Joi.object({
             full_name: Joi.string().min(1).trim().required(),
-            gender: Joi.string().valid(Gender.male, Gender.female, Gender.other).trim().required(),
+            gender: Joi.string()
+                .valid(...Object.keys(Gender))
+                .required(),
             birthdate: Joi.date().required(),
             age: Joi.number().required().min(1),
             city_id: Joi.string().uuid().required()
