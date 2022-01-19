@@ -14,7 +14,7 @@ class ClientsServices {
     }
 
     async listAll({ relations = 'location', ...query }): Promise<Pagination> {
-        const allClients = await ClientsRepository.listAll({ relations, query });
+        const allClients = await ClientsRepository.listAll({ relations, ...query });
 
         if (allClients.docs.length === 0) throw new NotFound('No results found');
 

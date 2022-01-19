@@ -25,7 +25,6 @@ export default class BaseRepository {
             Object.assign(filter, { relations: [relations] });
         }
         const [docs, total] = await getConnection(process.env.NODE_ENV).getRepository(this.model).findAndCount(filter);
-        console.log(docs);
 
         const result = {
             docs,

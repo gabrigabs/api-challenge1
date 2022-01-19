@@ -94,25 +94,4 @@ describe('Cities tests', () => {
         const { status } = response;
         expect(status).toBe(404);
     });
-
-    it('should be able to search cities by state name on req params', async () => {
-        const stateName = 'BA';
-
-        const city = {
-            city: 'Salvador',
-            state: 'BA'
-        };
-        await request.post('/api/v1/cities').send(city);
-
-        const response = await request.get(`/api/v1/cities/state/${stateName}`);
-        const { status, body } = response;
-        expect(status).toBe(200);
-        body.docs.forEach((doc: any) => expect(doc.state).toBe(stateName));
-    });
-
-    it('should be error on search a state that doesnt exist and return status 404', async () => {
-        const response = await request.get('/api/v1/cities/state/stateAleatorio');
-        const { status } = response;
-        expect(status).toBe(404);
-    });
 });
