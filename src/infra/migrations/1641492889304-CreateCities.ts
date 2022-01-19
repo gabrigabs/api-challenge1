@@ -1,4 +1,5 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { States } from '../../app/utils/stateEnum';
 
 export default class CreateCities1641592889304 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
@@ -26,7 +27,8 @@ export default class CreateCities1641592889304 implements MigrationInterface {
 
                     {
                         name: 'state',
-                        type: 'varchar',
+                        type: 'enum',
+                        enum: Object.keys(States),
                         isNullable: false
                     }
                 ]

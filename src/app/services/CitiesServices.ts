@@ -1,6 +1,5 @@
 import CitiesRepository from '../repositories/CitiesRepository';
 import { Pagination } from '../interfaces';
-import paginate from '../utils/paginate';
 import { BadRequest, NotFound } from '../errors';
 
 class CitiesServices {
@@ -11,24 +10,14 @@ class CitiesServices {
         return newData;
     }
 
-    async listAll({ page = 1, limit = 10, ...query }): Promise<Pagination> {
-        const filter = {
-            take: limit,
-            skip: (page - 1) * limit,
-            where: query
-        };
-        const [docs, total] = await CitiesRepository.listAll(filter);
+    async listAll(query: any): Promise<Pagination> {
+        const allCities = await CitiesRepository.listAll(query);
 
-        if (docs.length === 0) throw new NotFound('No results found');
+        if (allCities.docs.length === 0) {
+            throw new NotFound('No results found');
+        }
 
-        const result = {
-            docs,
-            total,
-            filter,
-            page,
-            pages: total / limit + 1
-        };
-        return paginate(result) as Pagination;
+        return allCities;
     }
 }
 
