@@ -29,15 +29,38 @@ describe('Clients Test', () => {
     });
 
     it('should not be able to to create a client without all fields', async () => {
+        const error = [
+            {
+                description: 'full_name',
+                message: '"full_name" is required'
+            },
+            {
+                description: 'gender',
+                message: '"gender" is required'
+            },
+            {
+                description: 'birthdate',
+                message: '"birthdate" is required'
+            },
+            {
+                description: 'city_id',
+                message: '"city_id" is required'
+            }
+        ];
         const client = {};
 
         const response = await request.post('/api/v1/clients').send(client);
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(400);
+        expect(body).toEqual(error);
     });
 
     it('Should not e able to create a client with a unexistent city id', async () => {
+        const error = {
+            description: 'Notfound',
+            message: 'This city id doesnt exist'
+        };
         const client = {
             full_name: 'Jose Silva',
             gender: 'male',
@@ -46,9 +69,10 @@ describe('Clients Test', () => {
         };
 
         const response = await request.post('/api/v1/clients').send(client);
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(404);
+        expect(body).toMatchObject(error);
     });
 
     it('Should be able to list all clients and have pagination', async () => {
@@ -65,15 +89,28 @@ describe('Clients Test', () => {
     });
 
     it('Should not be able to filter with a invalid query', async () => {
+        const error = [
+            {
+                description: 'query',
+                message: '"query" is not allowed'
+            }
+        ];
         const response = await request.get('/api/v1/clients?query=hihi');
-        const { status } = response;
+        const { body, status } = response;
+
         expect(status).toBe(400);
+        expect(body).toEqual(error);
     });
 
     it('Should return not found when docs length is equal to zero', async () => {
+        const error = {
+            description: 'Notfound',
+            message: 'No results found'
+        };
         const response = await request.get('/api/v1/clients?full_name=hihi');
-        const { status } = response;
+        const { body, status } = response;
         expect(status).toBe(404);
+        expect(body).toEqual(error);
     });
 
     it('Should be able to find a client by id', async () => {
@@ -99,15 +136,27 @@ describe('Clients Test', () => {
     });
 
     it('Should return Not Found when passes a valid id that doesnt exists', async () => {
+        const error = {
+            description: 'Notfound',
+            message: 'Client Not Found'
+        };
         const response = await request.get('/api/v1/clients/4b321652-c1ca-4326-8290-b2031f5932ec');
-        const { status } = response;
+        const { body, status } = response;
         expect(status).toBe(404);
+        expect(body).toMatchObject(error);
     });
 
     it('Should return bad request when passes a invalid id format', async () => {
+        const error = [
+            {
+                description: 'id',
+                message: '"id" must be a valid GUID'
+            }
+        ];
         const response = await request.get('/api/v1/clients/5595959484');
-        const { status } = response;
+        const { body, status } = response;
         expect(status).toBe(400);
+        expect(body).toEqual(error);
     });
 
     it('Should be able to change a client name', async () => {
@@ -136,28 +185,48 @@ describe('Clients Test', () => {
         expect(body.full_name).toContain(newName.full_name);
     });
     it('should return bad request when tryes to patch with a empty body', async () => {
+        const error = [
+            {
+                description: 'full_name',
+                message: '"full_name" is required'
+            }
+        ];
         const response = await request.patch('/api/v1/clients/4b321652-c1ca-4326-8290-b2031f5932ec');
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(400);
+        expect(body).toEqual(error);
     });
 
     it('should return not found when tryes to patch with a valid but a inexistent id', async () => {
+        const error = {
+            description: 'Notfound',
+            message: 'Client Not Found'
+        };
         const client = { full_name: 'Jose Silva Senior' };
 
         const response = await request.patch('/api/v1/clients/4b321652-c1ca-4326-8290-b2031f5932ec').send(client);
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(404);
+        expect(body).toMatchObject(error);
     });
 
     it('should return bad request when tryes to patch with a invalid id', async () => {
+        const error = [
+            {
+                description: 'id',
+                message: '"id" must be a valid GUID'
+            }
+        ];
+
         const client = { full_name: 'Jose Silva Senior' };
 
         const response = await request.patch('/api/v1/clients/4556534343').send(client);
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(400);
+        expect(body).toEqual(error);
     });
 
     it('should be able to delete a Client', async () => {
@@ -185,16 +254,30 @@ describe('Clients Test', () => {
     });
 
     it('should return not found when tries to delete a valid id that doesnt exists', async () => {
+        const error = {
+            description: 'Notfound',
+            message: 'Client Not Found'
+        };
+
         const response = await request.delete('/api/v1/clients/4b321652-c1ca-4326-8290-b2031f5932ec');
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(404);
+        expect(body).toMatchObject(error);
     });
 
     it('should return bad request when tries to delete a invalid id', async () => {
+        const error = [
+            {
+                description: 'id',
+                message: '"id" must be a valid GUID'
+            }
+        ];
+
         const response = await request.delete('/api/v1/clients/5484989895959');
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(400);
+        expect(body).toEqual(error);
     });
 });
