@@ -29,16 +29,6 @@ class CitiesController {
             return next(error);
         }
     }
-
-    async findAllByState(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
-        try {
-            const { state } = req.params;
-            const citiesByState = await CitiesServices.listAll({ state });
-            return res.status(200).json(citiesByState);
-        } catch (error) {
-            return next(error);
-        }
-    }
 }
 
 export default new CitiesController();

@@ -1,7 +1,5 @@
-import Client from './clientsInterface';
-
 export default interface Results {
-    docs: Array<Client>;
+    docs: Array<any>;
     limit: number;
     page: number;
     pages: number;

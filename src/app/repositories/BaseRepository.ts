@@ -19,12 +19,13 @@ export default class BaseRepository {
         const filter = {
             take: limit,
             skip: (page - 1) * limit,
-            query
+            where: query
         };
         if (relations) {
             Object.assign(filter, { relations: [relations] });
         }
         const [docs, total] = await getConnection(process.env.NODE_ENV).getRepository(this.model).findAndCount(filter);
+        console.log(docs);
 
         const result = {
             docs,

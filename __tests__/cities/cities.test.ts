@@ -6,7 +6,7 @@ describe('Cities tests', () => {
     it('Should be able to post a city', async () => {
         const city = {
             city: 'Fortaleza',
-            state: 'Ceara'
+            state: 'CE'
         };
         const response = await request.post('/api/v1/cities').send(city);
         const { status, body } = response;
@@ -19,12 +19,12 @@ describe('Cities tests', () => {
     it('Should not be able to post a city that name and state already exists and return error', async () => {
         const city = {
             city: 'Fortaleza',
-            state: 'Ceara'
+            state: 'CE'
         };
         await request.post('/api/v1/cities').send(city);
         const city2 = {
             city: 'Fortaleza',
-            state: 'Ceara'
+            state: 'CE'
         };
         const response = await request.post('/api/v1/cities').send(city2);
         const { status } = response;
@@ -34,7 +34,7 @@ describe('Cities tests', () => {
     it('Should not be able to post a city with a invalid body and return status 400', async () => {
         const city = {
             abc: '1234',
-            esto: 'Ceara'
+            esto: 'CE'
         };
         const response = await request.post('/api/v1/cities').send(city);
         const { status } = response;
@@ -79,7 +79,7 @@ describe('Cities tests', () => {
 
         const city = {
             city: 'Sao Paulo',
-            state: 'Sao Paulo'
+            state: 'SP'
         };
         await request.post('/api/v1/cities').send(city);
 
@@ -96,11 +96,11 @@ describe('Cities tests', () => {
     });
 
     it('should be able to search cities by state name on req params', async () => {
-        const stateName = 'Ceara';
+        const stateName = 'BA';
 
         const city = {
             city: 'Salvador',
-            state: 'Bahia'
+            state: 'BA'
         };
         await request.post('/api/v1/cities').send(city);
 
