@@ -239,7 +239,7 @@ describe('Clients Test', () => {
         const client = {
             full_name: 'Jose Silva Junior',
             gender: 'male',
-            birthdate: '2001/05/01',
+            birthdate: '2001/12/01',
             city_id: `${cityres.body.id}`
         };
         const clientTest = await request.post('/api/v1/clients').send(client);

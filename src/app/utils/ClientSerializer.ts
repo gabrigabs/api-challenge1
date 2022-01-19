@@ -1,4 +1,5 @@
 import { Client, Pagination } from '../interfaces';
+import { getAge } from './getAge';
 
 const clientSerializer = ({ id, full_name, gender, birthdate, location }: Client) => {
     const { city, state } = location;
@@ -7,6 +8,7 @@ const clientSerializer = ({ id, full_name, gender, birthdate, location }: Client
         full_name,
         gender,
         birthdate,
+        age: getAge(birthdate),
         location: {
             city,
             state
