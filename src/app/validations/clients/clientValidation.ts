@@ -11,7 +11,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
                 .valid(...Object.keys(Gender))
                 .required(),
             birthdate: Joi.date().required(),
-            age: Joi.number().required().min(1),
             city_id: Joi.string().uuid().required()
         });
 

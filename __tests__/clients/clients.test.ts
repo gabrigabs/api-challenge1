@@ -7,14 +7,13 @@ describe('Clients Test', () => {
     it('should be able to create a new Client', async () => {
         const city = {
             city: 'Fortaleza',
-            state: 'Ceara'
+            state: 'CE'
         };
         const cityres = await request.post('/api/v1/cities').send(city);
         const client = {
             full_name: 'Jose Silva',
             gender: 'male',
             birthdate: '1981/05/01',
-            age: 40,
             city_id: `${cityres.body.id}`
         };
 
@@ -26,32 +25,54 @@ describe('Clients Test', () => {
         expect(body.full_name).toContain(client.full_name);
         expect(body.gender).toContain(client.gender);
         expect(body.birthdate).toContain(client.birthdate);
-        expect(body.age).toBe(client.age);
         expect(body.city_id).toContain(cityres.body.id);
     });
 
     it('should not be able to to create a client without all fields', async () => {
+        const error = [
+            {
+                description: 'full_name',
+                message: '"full_name" is required'
+            },
+            {
+                description: 'gender',
+                message: '"gender" is required'
+            },
+            {
+                description: 'birthdate',
+                message: '"birthdate" is required'
+            },
+            {
+                description: 'city_id',
+                message: '"city_id" is required'
+            }
+        ];
         const client = {};
 
         const response = await request.post('/api/v1/clients').send(client);
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(400);
+        expect(body).toEqual(error);
     });
 
     it('Should not e able to create a client with a unexistent city id', async () => {
+        const error = {
+            description: 'Notfound',
+            message: 'This city id doesnt exist'
+        };
         const client = {
             full_name: 'Jose Silva',
             gender: 'male',
             birthdate: '1981/05/01',
-            age: 40,
             city_id: '4b321652-c1ca-4326-8290-b2031f5932ec'
         };
 
         const response = await request.post('/api/v1/clients').send(client);
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(404);
+        expect(body).toMatchObject(error);
     });
 
     it('Should be able to list all clients and have pagination', async () => {
@@ -68,28 +89,40 @@ describe('Clients Test', () => {
     });
 
     it('Should not be able to filter with a invalid query', async () => {
+        const error = [
+            {
+                description: 'query',
+                message: '"query" is not allowed'
+            }
+        ];
         const response = await request.get('/api/v1/clients?query=hihi');
-        const { status } = response;
+        const { body, status } = response;
+
         expect(status).toBe(400);
+        expect(body).toEqual(error);
     });
 
     it('Should return not found when docs length is equal to zero', async () => {
+        const error = {
+            description: 'Notfound',
+            message: 'No results found'
+        };
         const response = await request.get('/api/v1/clients?full_name=hihi');
-        const { status } = response;
+        const { body, status } = response;
         expect(status).toBe(404);
+        expect(body).toEqual(error);
     });
 
     it('Should be able to find a client by id', async () => {
         const city = {
             city: 'cidade',
-            state: 'estado'
+            state: 'ES'
         };
         const cityres = await request.post('/api/v1/cities').send(city);
         const client = {
             full_name: 'Jose Silva Junior',
             gender: 'male',
             birthdate: '2001/05/01',
-            age: 20,
             city_id: `${cityres.body.id}`
         };
         const clientinfo = await request.post('/api/v1/clients').send(client);
@@ -103,42 +136,39 @@ describe('Clients Test', () => {
     });
 
     it('Should return Not Found when passes a valid id that doesnt exists', async () => {
+        const error = {
+            description: 'Notfound',
+            message: 'Client Not Found'
+        };
         const response = await request.get('/api/v1/clients/4b321652-c1ca-4326-8290-b2031f5932ec');
-        const { status } = response;
+        const { body, status } = response;
         expect(status).toBe(404);
+        expect(body).toMatchObject(error);
     });
 
     it('Should return bad request when passes a invalid id format', async () => {
+        const error = [
+            {
+                description: 'id',
+                message: '"id" must be a valid GUID'
+            }
+        ];
         const response = await request.get('/api/v1/clients/5595959484');
-        const { status } = response;
+        const { body, status } = response;
         expect(status).toBe(400);
-    });
-
-    it('Should be able to find a client by name', async () => {
-        const clientName = 'Jose Silva Junior';
-        const response = await request.get(`/api/v1/clients/name/${clientName}`);
-        const { status, body } = response;
-        expect(status).toBe(200);
-        expect(body.full_name).toContain(clientName);
-    });
-
-    it('Should return not found when try to get a name that doesnt exist', async () => {
-        const response = await request.get('/api/v1/clients/name/Naruto');
-        const { status } = response;
-        expect(status).toBe(404);
+        expect(body).toEqual(error);
     });
 
     it('Should be able to change a client name', async () => {
         const city = {
             city: 'Rio de Janeiro',
-            state: 'Rio de Janeiro'
+            state: 'RJ'
         };
         const cityres = await request.post('/api/v1/cities').send(city);
         const client = {
             full_name: 'Jose Silva Junior',
             gender: 'male',
             birthdate: '2001/05/01',
-            age: 20,
             city_id: `${cityres.body.id}`
         };
         const clientTest = await request.post('/api/v1/clients').send(client);
@@ -155,42 +185,61 @@ describe('Clients Test', () => {
         expect(body.full_name).toContain(newName.full_name);
     });
     it('should return bad request when tryes to patch with a empty body', async () => {
+        const error = [
+            {
+                description: 'full_name',
+                message: '"full_name" is required'
+            }
+        ];
         const response = await request.patch('/api/v1/clients/4b321652-c1ca-4326-8290-b2031f5932ec');
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(400);
+        expect(body).toEqual(error);
     });
 
     it('should return not found when tryes to patch with a valid but a inexistent id', async () => {
+        const error = {
+            description: 'Notfound',
+            message: 'Client Not Found'
+        };
         const client = { full_name: 'Jose Silva Senior' };
 
         const response = await request.patch('/api/v1/clients/4b321652-c1ca-4326-8290-b2031f5932ec').send(client);
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(404);
+        expect(body).toMatchObject(error);
     });
 
     it('should return bad request when tryes to patch with a invalid id', async () => {
+        const error = [
+            {
+                description: 'id',
+                message: '"id" must be a valid GUID'
+            }
+        ];
+
         const client = { full_name: 'Jose Silva Senior' };
 
         const response = await request.patch('/api/v1/clients/4556534343').send(client);
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(400);
+        expect(body).toEqual(error);
     });
 
     it('should be able to delete a Client', async () => {
         const city = {
             city: 'Salvador',
-            state: 'Bahia'
+            state: 'BA'
         };
         const cityres = await request.post('/api/v1/cities').send(city);
 
         const client = {
             full_name: 'Jose Silva Junior',
             gender: 'male',
-            birthdate: '2001/05/01',
-            age: 20,
+            birthdate: '2001/12/01',
             city_id: `${cityres.body.id}`
         };
         const clientTest = await request.post('/api/v1/clients').send(client);
@@ -205,16 +254,30 @@ describe('Clients Test', () => {
     });
 
     it('should return not found when tries to delete a valid id that doesnt exists', async () => {
+        const error = {
+            description: 'Notfound',
+            message: 'Client Not Found'
+        };
+
         const response = await request.delete('/api/v1/clients/4b321652-c1ca-4326-8290-b2031f5932ec');
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(404);
+        expect(body).toMatchObject(error);
     });
 
     it('should return bad request when tries to delete a invalid id', async () => {
+        const error = [
+            {
+                description: 'id',
+                message: '"id" must be a valid GUID'
+            }
+        ];
+
         const response = await request.delete('/api/v1/clients/5484989895959');
-        const { status } = response;
+        const { body, status } = response;
 
         expect(status).toBe(400);
+        expect(body).toEqual(error);
     });
 });

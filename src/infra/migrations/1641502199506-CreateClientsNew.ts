@@ -36,11 +36,6 @@ export default class CreateClientsNew1641593199506 implements MigrationInterface
                         isNullable: false
                     },
                     {
-                        name: 'age',
-                        type: 'int',
-                        isNullable: false
-                    },
-                    {
                         name: 'city_id',
                         type: 'uuid',
                         isNullable: false

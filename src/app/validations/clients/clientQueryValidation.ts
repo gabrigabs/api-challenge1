@@ -10,7 +10,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
             id: Joi.string().uuid(),
             full_name: Joi.string().min(1),
             gender: Joi.string().min(1).trim(),
-            age: Joi.number().min(1),
             birthdate: Joi.date()
         });
 

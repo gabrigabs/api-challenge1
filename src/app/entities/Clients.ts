@@ -20,9 +20,6 @@ class Clients {
     birthdate!: Date;
 
     @Column()
-    age!: number;
-
-    @Column()
     city_id!: string;
 
     @ManyToOne(() => Cities)
